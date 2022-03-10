@@ -1,10 +1,11 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
+import {custom} from './custom.js';
 export default function(props){
     return(
-        <View style={styles.formContainer}>
-            <Text style={styles.text}>Inserisci {props.value}:</Text>
-            <TextInput style={styles.textInput} secureTextEntry={props.value === "password"}
-            onChangeText={txt => props.pippo(txt)}
+        <View style={custom.container}>
+            <Text style={custom.text}>Inserisci {props.desc}:</Text>
+            <TextInput style={styles.textInput} secureTextEntry={props.desc === "password"}
+            onChangeText={txt => props.onNewValue(txt)}
             />
         </View>
     )
@@ -13,11 +14,8 @@ export default function(props){
 
 
 const styles = StyleSheet.create({
-    formContainer: {
-        margin: 10,
-    },
     textInput:{
-        borderColor: 'black',
+        borderColor: 'white',
         borderWidth: 1,
         alignSelf: 'flex-start',
         width: "95%",
@@ -25,9 +23,4 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 5,
     },
-    text:{
-        fontSize: 20,
-        margin: 8,
-        color: 'white',
-    }
 });

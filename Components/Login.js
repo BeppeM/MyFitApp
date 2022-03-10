@@ -2,44 +2,50 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 import Form from './Form';
 import {useState} from 'react';
 import {Button} from 'react-native-elements';
-let data = require('../data.json');
+import {custom, buttonStyle} from './custom.js';
+//Simple data to verify the correct navigation
+let users = require('../users.json');
+
 export default function Login({navigation}){
     const [email, setEmail] = useState("");
     const [password, setPwd] = useState("");
+    //error in login
+    const [logErr, setLogErr] = useState("");
     return(
         <View style={styles.login}>
-            <Form value="email" val={email}
-            pippo={ v =>{
-                setEmail(v);
-            }}
+            <Form desc="email" val={email}
+                onNewValue={ v =>{setEmail(v);}}
             />
-            <Form value="password" change={setPwd}/>
+            <Form desc="password" val={password}
+                  onNewValue={ v =>{setPwd(v);}}
+            />
+            <View style={custom.container}>
+                <Text style={custom.text}>{logErr}</Text>
+            </View>
             <Button
                 title="LOG IN"
-                containerStyle={{
-                  alignSelf: 'center',
-                  width: '50%',
-                }}
                 titleStyle={{ fontWeight: 'bold' }}
+                {...containerStyle}
                 {...buttonStyle}
                 onPress= {() =>{
-                    //setPippo("Bella broooo");
-                    //Replacing screen after the login
+                    if((users[0].email === email)&&
+                       (users[0].password === password))
                         navigation.replace("MySchedule");
+                    else
+                        setLogErr("Errore, credenziali errate. Riprova");
                 }}
               />
         </View>
     )
 }
 
-//Button style
-const buttonStyle= {buttonStyle: {
-    backgroundColor: '#01579b',
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 30,
+//Button style for the inner container
+const containerStyle={containerStyle: {
+    alignSelf: 'center',
+    width: '50%',
   }}
 
+//style for the login view
 const styles = StyleSheet.create({
     login:{
         flex: 1,
