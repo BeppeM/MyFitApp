@@ -4,19 +4,37 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
-import Login from './Components/Login.js';
-import MySchedule from './Components/MySchedule.js';
-
+import Login from './screens/Login.js';
+import MyTrainings from './screens/MyTrainings.js';
+import auth from './firebase.js';
+import { createContext, useState } from 'react';
+//Navigation into the app
 const Stack = createNativeStackNavigator();
+//Creating the context
+export const appContext = createContext();
 
 export default function App() {
+  const [email, setEmail] = useState("");
   return (
-    <NavigationContainer>
-    <Stack.Navigator>
-      <Stack.Screen name="Login" component={Login}/>
-      <Stack.Screen name="MySchedule" component={MySchedule}/>
-    </Stack.Navigator>
-    </NavigationContainer>
+    <appContext.Provider value= {{email, setEmail}}>
+      <Pippo/>
+    </appContext.Provider>
   );
 }
 
+function Pippo(){
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+          <Stack.Screen 
+            name="Login" 
+            component={Login}
+          />
+          <Stack.Screen 
+            name="MyTrainings" 
+            component={MyTrainings}
+          />
+      </Stack.Navigator>
+      </NavigationContainer>
+  )
+}

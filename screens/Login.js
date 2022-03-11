@@ -1,13 +1,17 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
-import Form from './Form';
-import {useState} from 'react';
+import Form from '../Components/Form';
+import {appContext} from '../App.js';
+import {useState, useContext} from 'react';
 import {Button} from 'react-native-elements';
-import {custom, buttonStyle} from './custom.js';
+import {custom, buttonStyle} from '../Components/custom.js';
+import {auth} from '../firebase.js';
+import {handleLogin} from '../firebase.js';
 //Simple data to verify the correct navigation
 let users = require('../users.json');
 
 export default function Login({navigation}){
-    const [email, setEmail] = useState("");
+    //setEmail from the context
+    const {email, setEmail} = useContext(appContext);
     const [password, setPwd] = useState("");
     //error in login
     const [logErr, setLogErr] = useState("");
@@ -28,11 +32,17 @@ export default function Login({navigation}){
                 {...containerStyle}
                 {...buttonStyle}
                 onPress= {() =>{
-                    if((users[0].email === email)&&
-                       (users[0].password === password))
-                        navigation.replace("MySchedule");
-                    else
-                        setLogErr("Errore, credenziali errate. Riprova");
+                    handleLogin(email, password).then((userCredential) => {
+                        // Signed in 
+                        //const user = userCredential.user;
+                        navigation.replace("MyTrainings");
+                        // ...
+                    })
+                    .catch((error) => {
+                        //const errorCode = error.code;
+                        //const errorMessage = error.message;
+                        setLogErr("Errore, credenziali errate. Riprova oppure registrati");
+                    });
                 }}
               />
         </View>
