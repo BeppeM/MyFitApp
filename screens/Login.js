@@ -5,7 +5,7 @@ import {useState, useContext} from 'react';
 import {Button} from 'react-native-elements';
 import {custom, buttonStyle} from '../Components/custom.js';
 import {auth} from '../firebase.js';
-import {handleLogin} from '../firebase.js';
+import {handleLogin, handleReg} from '../firebase.js';
 //Simple data to verify the correct navigation
 let users = require('../users.json');
 
@@ -16,18 +16,18 @@ export default function Login({navigation}){
     //error in login
     const [logErr, setLogErr] = useState("");
     return(
-        <View style={styles.login}>
+        <View style={custom.container}>
             <Form desc="email" val={email}
                 onNewValue={ v =>{setEmail(v);}}
             />
             <Form desc="password" val={password}
                   onNewValue={ v =>{setPwd(v);}}
             />
-            <View style={custom.container}>
+            <View>
                 <Text style={custom.text}>{logErr}</Text>
             </View>
             <Button
-                title="LOG IN"
+                title="Login"
                 titleStyle={{ fontWeight: 'bold' }}
                 {...containerStyle}
                 {...buttonStyle}
@@ -42,6 +42,22 @@ export default function Login({navigation}){
                         //const errorCode = error.code;
                         //const errorMessage = error.message;
                         setLogErr("Errore, credenziali errate. Riprova oppure registrati");
+                    });
+                }}
+              />
+              <Button
+                title="Registrati"
+                titleStyle={{ fontWeight: 'bold' }}
+                {...containerStyle}
+                {...buttonStyle}
+                onPress= {() =>{
+                    handleReg(email, password).then((userCredential) => {
+                        // Signed in 
+                        const user = userCredential.user;
+                        navigation.replace("MyTrainings");
+                    })
+                    .catch((error) => {
+                        setLogErr(error.message);
                     });
                 }}
               />
@@ -61,5 +77,11 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#4f83cc',
         justifyContent: 'center',
+    },
+    logErr:{
+        backgroundColor: '#4f83cc',
+        justifyContent: 'center',
+        margin: 8,
+        padding:5,
     }
 });
