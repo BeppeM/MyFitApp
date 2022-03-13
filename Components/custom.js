@@ -19,7 +19,20 @@ export const custom = StyleSheet.create({
     containerStyle: {
         alignSelf: 'center',
         width: '50%',
-      }
+      },
+//Trainings card      
+    cardContainer:{
+        flex: 1,
+        backgroundColor: '#4f83cc',
+        padding: 5,
+    },
+    card:{
+        backgroundColor: '#5472d3',
+        margin: 8,
+        borderColor: 'white',
+        borderWidth: 1,
+        borderRadius: 10,
+    }
 });
 
 //Button style

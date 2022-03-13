@@ -3,7 +3,9 @@ import Form from '../Components/Form';
 import {appContext} from '../App.js';
 import {useState, useContext} from 'react';
 import {Button} from 'react-native-elements';
+//style
 import {custom, buttonStyle} from '../Components/custom.js';
+//firebise authentication
 import {auth} from '../firebase.js';
 import {handleLogin, handleReg} from '../firebase.js';
 //Simple data to verify the correct navigation
@@ -12,6 +14,7 @@ let users = require('../users.json');
 export default function Login({navigation}){
     //setEmail from the context
     const {email, setEmail} = useContext(appContext);
+    
     const [password, setPwd] = useState("");
     //error in login
     const [logErr, setLogErr] = useState("");

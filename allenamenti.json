@@ -1,0 +1,84 @@
+[
+//primo allenamento
+    {
+        "title": "allenamento1",
+        "goal": "strength",
+        "giorno1":[
+        //elenco esercizi nel giorno 1
+            {
+                "titoloEs": "piegamenti",
+                "set" : 4,
+                "rep": 8
+            },            
+            {
+                "titoloEs": "pull ups",
+                "set" : 4,
+                "rep": 5
+            }
+        ]
+    },
+    {
+        "title": "allenamento2",
+        "goal": "flexibility",
+        "giorno1":[
+            {
+                "titoloEs": "piegamenti",
+                "set" : 4,
+                "rep": 8
+            },            
+            {
+                "titoloEs": "pull ups",
+                "set" : 4,
+                "rep": 5
+            }
+        ]
+    },
+    {
+        "title": "allenamento2",
+        "goal": "flexibility",
+        "giorno1":[
+            {
+                "titoloEs": "piegamenti",
+                "set" : 4,
+                "rep": 8
+            },            
+            {
+                "titoloEs": "pull ups",
+                "set" : 4,
+                "rep": 5
+            }
+        ]
+    },
+    {
+        "title": "allenamento2",
+        "goal": "flexibility",
+        "giorno1":[
+            {
+                "titoloEs": "piegamenti",
+                "set" : 4,
+                "rep": 8
+            },            
+            {
+                "titoloEs": "pull ups",
+                "set" : 4,
+                "rep": 5
+            }
+        ]
+    },
+    {
+        "title": "allenamento2",
+        "goal": "flexibility",
+        "giorno1":[
+            {
+                "titoloEs": "piegamenti",
+                "set" : 4,
+                "rep": 8
+            },            
+            {
+                "titoloEs": "pull ups",
+                "set" : 4,
+                "rep": 5
+            }
+        ]
+    }
+]
