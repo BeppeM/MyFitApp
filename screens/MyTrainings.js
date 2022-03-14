@@ -5,9 +5,13 @@ import {custom} from '../Components/custom.js';
 import Card from '../Components/Card.js';
 import uuid from 'react-native-uuid';
 import { FAB } from 'react-native-paper';
+import { readTrainings } from '../firebase.js';
+
 let trainings = require('../allenamenti.json');
 export default function MyTrainings(){
     const {email} = useContext(appContext);
+//    const trainings = readTrainings(email);
+    readTrainings(email);
     return (
             <View style={custom.cardContainer}>
                 <Text>Ci siamo {email}</Text>
@@ -41,5 +45,6 @@ const styles = StyleSheet.create({
       margin: 16,
       right: 0,
       bottom: 0,
+      backgroundColor: '#002f6c',
     },
   })
