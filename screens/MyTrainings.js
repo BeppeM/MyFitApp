@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     },
   })
 
+//Reading all workouts of the user logged in
   const reading= (email) => readWorkouts(queryWorkout(email))
     .then((snapshot) =>{
         snapshot.docs.forEach((workout) =>{
