@@ -8,20 +8,13 @@ import { FAB } from 'react-native-paper';
 import { queryWorkout, readWorkouts } from '../firebase.js';
 import { doc } from 'firebase/firestore';
 
+let workouts = [];
+    
 //let trainings = require('../allenamenti.json');
 export default function MyTrainings(){
     const {email} = useContext(appContext);
-    let workouts = [];
-    readWorkouts(queryWorkout(email))
-    .then((snapshot) =>{
-        snapshot.docs.forEach((workout) =>{
-            workouts.push({
-                ...workout.data(),
-                id: workout.id,                 
-                });
-        })    
-        console.log(workouts);
-    }).catch((err) => console.log(err));
+    //Reading workouts
+    reading(email);
     return (
             <View style={custom.cardContainer}>
                 <Text>Ci siamo {email}</Text>
@@ -48,7 +41,18 @@ const styles = StyleSheet.create({
     },
   })
 
-  /*
+  const reading= (email) => readWorkouts(queryWorkout(email))
+    .then((snapshot) =>{
+        snapshot.docs.forEach((workout) =>{
+            workouts.push({
+                ...workout.data(),
+                id: workout.id,                 
+                });
+        })    
+        console.log(workouts);
+    }).catch((err) => console.log(err));
+  
+    /*
   {trainings.map( (training) =>
                         <TouchableOpacity
                         onPress={() =>{console.log("You clicked!!")}}
