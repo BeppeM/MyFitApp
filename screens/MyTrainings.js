@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { useContext } from 'react';
+import { useContext, useReducer } from 'react';
 import {appContext} from '../App.js';
 import {custom} from '../Components/custom.js';
 import Card from '../Components/Card.js';
