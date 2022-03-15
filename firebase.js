@@ -1,8 +1,10 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { 
+  getFirestore, where, 
+  collection, getDocs, 
+  addDoc, query } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -33,22 +35,10 @@ export const handleReg = (email, password) =>
 //database
 export const db = getFirestore();
 
-//Add new data to firestore
-export const addTraining= async (titolo, goal, email) =>
-{
-  try {
-    const docRef = await addDoc(collection(db, "users-trainings").collection(db, email), {
-      title: titolo,
-      goal: goal,
-      
-    });
-  console.log("Document written with ID: ", docRef.id);
-  } 
-  catch (e) {
-    console.error("Error adding document: ", e);
-  }
-}
-
-//Query for reading the user's trainings 
-const userTrainings = (email) => 
-  doc(db, "users-trainings", email, "trainings");
+//ref
+const workRef= collection(db, "workouts");
+//query
+export const queryWorkout =(email) => 
+query(workRef, where("users", "array-contains", email));
+//Read data
+export const readWorkouts= (q) => getDocs(q)

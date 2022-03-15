@@ -5,29 +5,28 @@ import {custom} from '../Components/custom.js';
 import Card from '../Components/Card.js';
 import uuid from 'react-native-uuid';
 import { FAB } from 'react-native-paper';
-import { readTrainings } from '../firebase.js';
+import { queryWorkout, readWorkouts } from '../firebase.js';
+import { doc } from 'firebase/firestore';
 
-let trainings = require('../allenamenti.json');
+//let trainings = require('../allenamenti.json');
 export default function MyTrainings(){
     const {email} = useContext(appContext);
-//    const trainings = readTrainings(email);
-    readTrainings(email);
+    let workouts = [];
+    readWorkouts(queryWorkout(email))
+    .then((snapshot) =>{
+        snapshot.docs.forEach((workout) =>{
+            workouts.push({
+                ...workout.data(),
+                id: workout.id,                 
+                });
+        })    
+        console.log(workouts);
+    }).catch((err) => console.log(err));
     return (
             <View style={custom.cardContainer}>
                 <Text>Ci siamo {email}</Text>
                 <ScrollView>
-                    {trainings.map( (training) =>
-                        <TouchableOpacity
-                        onPress={() =>{console.log("You clicked!!")}}
-                        underlayColor= 'white'
-                        uuid={uuid.v4()}
-                        >
-                            <Card 
-                            title={training.title}
-                            goal={training.goal}
-                            />
-                        </TouchableOpacity>
-                    )}
+                    
                 </ScrollView>
                 <FAB
                     style={styles.fab}
@@ -48,3 +47,18 @@ const styles = StyleSheet.create({
       backgroundColor: '#002f6c',
     },
   })
+
+  /*
+  {trainings.map( (training) =>
+                        <TouchableOpacity
+                        onPress={() =>{console.log("You clicked!!")}}
+                        underlayColor= 'white'
+                        uuid={uuid.v4()}
+                        >
+                            <Card 
+                            title={training.title}
+                            goal={training.goal}
+                            />
+                        </TouchableOpacity>
+                    )}
+   */
