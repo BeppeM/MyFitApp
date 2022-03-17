@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { useContext, useReducer } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {appContext} from '../App.js';
 import {custom} from '../Components/custom.js';
 import Card from '../Components/Card.js';
@@ -13,13 +13,19 @@ let workouts = [];
 //let trainings = require('../allenamenti.json');
 export default function MyTrainings(){
     const {email} = useContext(appContext);
-    //Reading workouts
-    reading(email);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(async () =>{      
+      //Getting data from firestore
+      reading(email);      
+      //Rerender
+      console.log("Bella ciao!!");
+    }, [workouts]);
     return (
             <View style={custom.cardContainer}>
                 <Text>Ci siamo {email}</Text>
                 <ScrollView>
-                    
+                  {loading && <Workouts/>}                         
                 </ScrollView>
                 <FAB
                     style={styles.fab}
@@ -49,21 +55,23 @@ const styles = StyleSheet.create({
                 ...workout.data(),
                 id: workout.id,                 
                 });
-        })    
+        });        
         console.log(workouts);
     }).catch((err) => console.log(err));
-  
-    /*
-  {trainings.map( (training) =>
-                        <TouchableOpacity
-                        onPress={() =>{console.log("You clicked!!")}}
-                        underlayColor= 'white'
-                        uuid={uuid.v4()}
-                        >
-                            <Card 
-                            title={training.title}
-                            goal={training.goal}
-                            />
-                        </TouchableOpacity>
-                    )}
-   */
+
+function Workouts(){
+  return (
+    workouts.map( (workout) =>
+      <TouchableOpacity
+      onPress={() =>{console.log("You clicked!!")}}
+      underlayColor= 'white'
+      uuid={workout.id}
+      >
+        <Card 
+          title={workout.title}
+          goal={workout.goal}
+        />
+      </TouchableOpacity>
+    ))
+}
+    
