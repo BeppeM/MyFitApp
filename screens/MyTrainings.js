@@ -10,7 +10,7 @@ import { doc } from 'firebase/firestore';
 
 
 //let trainings = require('../allenamenti.json');
-export default function MyTrainings(){
+export default function MyTrainings({navigation}){
     const {email} = useContext(appContext);
     const [workouts, setWorkouts] = useState([]);
 
@@ -22,13 +22,18 @@ export default function MyTrainings(){
       //Rerender
       console.log("Bella ciao!!");
     }, []);
+
+//MyTraining component
     return (
             <View style={custom.cardContainer}>
                 <Text>Ci siamo {email}</Text>
                 <ScrollView>
                   {workouts===[] 
                     ? <Text>Loading...</Text> 
-                    : <Workouts workouts={workouts}/>
+                    : <Workouts 
+                        workouts={workouts} 
+                        navigation={navigation}
+                      />
                   }                         
                 </ScrollView>
                 <FAB
@@ -41,37 +46,12 @@ export default function MyTrainings(){
     )
 }
 
-const styles = StyleSheet.create({
-    fab: {
-      position: 'absolute',
-      margin: 16,
-      right: 0,
-      bottom: 0,
-      backgroundColor: '#002f6c',
-    },
-  })
-
-//Reading all workouts of the user logged in
-  const reading= (email, setWorkouts) => readWorkouts(queryWorkout(email))
-    .then((snapshot) =>{
-      let tmp=[]
-        snapshot.docs.forEach((workout) =>{
-            tmp.push({
-                ...workout.data(),
-                id: workout.id,                 
-                });
-        });        
-        console.log("Finished fetching workouts of: " + email);
-        console.log(tmp);
-//Fetch done, i rerender the whole component
-        setWorkouts(tmp);
-    }).catch((err) => console.log(err));
-
-function Workouts({workouts}){
+//Components to show workouts' cards
+function Workouts({workouts, navigation}){
   return (
     workouts.map( (workout) =>
       <TouchableOpacity
-      onPress={() =>{console.log("You clicked!!")}}
+      onPress={() =>{navigation.push("WorkoutDetails")}}
       underlayColor= 'white'
       >
         <Card 
@@ -82,4 +62,32 @@ function Workouts({workouts}){
       </TouchableOpacity>
     ))
 }
-    
+
+
+//Reading all workouts of the user logged in
+const reading= (email, setWorkouts) => readWorkouts(queryWorkout(email))
+.then((snapshot) =>{
+  let tmp=[]
+  //Getting data
+    snapshot.docs.forEach((workout) =>{
+        tmp.push({
+            ...workout.data(),
+            id: workout.id,                 
+            });
+    });        
+    console.log("Finished fetching workouts of: " + email);
+    console.log(tmp);
+//Fetch done, i rerender the whole component
+    setWorkouts(tmp);
+}).catch((err) => console.log(err));
+
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+    backgroundColor: '#002f6c',
+  },
+})

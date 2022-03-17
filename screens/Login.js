@@ -18,6 +18,7 @@ export default function Login({navigation}){
     const [password, setPwd] = useState("");
     //error in login
     const [logErr, setLogErr] = useState("");
+    
     return(
         <View style={custom.container}>
             <Form desc="email" val={email}

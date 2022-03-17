@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import Login from './screens/Login.js';
 import MyTrainings from './screens/MyTrainings.js';
+import WorkoutDetails from './screens/WorkoutDetails.js';
 import auth from './firebase.js';
 import { createContext, useState } from 'react';
 //Navigation into the app
@@ -33,6 +34,10 @@ function Pippo(){
           <Stack.Screen 
             name="MyTrainings" 
             component={MyTrainings}
+          />
+          <Stack.Screen 
+            name="WorkoutDetails" 
+            component={WorkoutDetails}
           />
       </Stack.Navigator>
       </NavigationContainer>
