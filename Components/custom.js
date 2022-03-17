@@ -4,6 +4,7 @@
 import {StyleSheet} from 'react-native';
 
 export const custom = StyleSheet.create({
+    //Background style
     container: {
         flex: 1,
         backgroundColor: '#4f83cc',

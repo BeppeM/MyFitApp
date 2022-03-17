@@ -1,3 +1,6 @@
+/**
+ * Screen used to show all the trainings of the user logged in
+ */
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { useState, useContext, useEffect } from 'react';
 import {appContext} from '../App.js';
@@ -51,7 +54,10 @@ function Workouts({workouts, navigation}){
   return (
     workouts.map( (workout) =>
       <TouchableOpacity
-      onPress={() =>{navigation.push("WorkoutDetails")}}
+      onPress={() =>{navigation.navigate("WorkoutDetails",{
+        workout: workout
+        })
+      }}
       underlayColor= 'white'
       >
         <Card 
