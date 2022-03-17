@@ -8,24 +8,28 @@ import { FAB } from 'react-native-paper';
 import { queryWorkout, readWorkouts } from '../firebase.js';
 import { doc } from 'firebase/firestore';
 
-let workouts = [];
-    
+
 //let trainings = require('../allenamenti.json');
 export default function MyTrainings(){
     const {email} = useContext(appContext);
-    const [loading, setLoading] = useState(false);
+    const [workouts, setWorkouts] = useState([]);
 
+//useEffect performed only on mounts of the component
     useEffect(async () =>{      
       //Getting data from firestore
-      reading(email);      
+      console.log("Fetching workouts of: " + email + " from firestore")
+      reading(email, setWorkouts);      
       //Rerender
       console.log("Bella ciao!!");
-    }, [workouts]);
+    }, []);
     return (
             <View style={custom.cardContainer}>
                 <Text>Ci siamo {email}</Text>
                 <ScrollView>
-                  {loading && <Workouts/>}                         
+                  {workouts===[] 
+                    ? <Text>Loading...</Text> 
+                    : <Workouts workouts={workouts}/>
+                  }                         
                 </ScrollView>
                 <FAB
                     style={styles.fab}
@@ -48,26 +52,30 @@ const styles = StyleSheet.create({
   })
 
 //Reading all workouts of the user logged in
-  const reading= (email) => readWorkouts(queryWorkout(email))
+  const reading= (email, setWorkouts) => readWorkouts(queryWorkout(email))
     .then((snapshot) =>{
+      let tmp=[]
         snapshot.docs.forEach((workout) =>{
-            workouts.push({
+            tmp.push({
                 ...workout.data(),
                 id: workout.id,                 
                 });
         });        
-        console.log(workouts);
+        console.log("Finished fetching workouts of: " + email);
+        console.log(tmp);
+//Fetch done, i rerender the whole component
+        setWorkouts(tmp);
     }).catch((err) => console.log(err));
 
-function Workouts(){
+function Workouts({workouts}){
   return (
     workouts.map( (workout) =>
       <TouchableOpacity
       onPress={() =>{console.log("You clicked!!")}}
       underlayColor= 'white'
-      uuid={workout.id}
       >
         <Card 
+          uuid={workout.id}
           title={workout.title}
           goal={workout.goal}
         />
