@@ -43,7 +43,12 @@ export default function MyTrainings({navigation}){
                     style={styles.fab}
                     small
                     icon="plus"
-                    onPress={() => console.log('Pressed')}
+                    onPress={() => 
+                      {
+                        console.log('Adding new workout')
+                        navigation.navigate("AddWorkout")
+                      }
+                    }
                 />
             </View>
     )

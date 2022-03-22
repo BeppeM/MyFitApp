@@ -9,6 +9,7 @@ import MyTrainings from './screens/MyTrainings.js';
 import WorkoutDetails from './screens/WorkoutDetails.js';
 import auth from './firebase.js';
 import { createContext, useState } from 'react';
+import AddWorkout from './screens/AddWorkout.js';
 //Navigation into the app
 const Stack = createNativeStackNavigator();
 //Creating the context
@@ -28,16 +29,16 @@ function Pippo(){
     <NavigationContainer>
       <Stack.Navigator>
           <Stack.Screen 
-            name="Login" 
-            component={Login}
-          />
-          <Stack.Screen 
             name="MyTrainings" 
             component={MyTrainings}
           />
           <Stack.Screen 
             name="WorkoutDetails" 
             component={WorkoutDetails}
+          />
+          <Stack.Screen 
+            name="AddWorkout" 
+            component={AddWorkout}
           />
       </Stack.Navigator>
       </NavigationContainer>
