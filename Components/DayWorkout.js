@@ -10,7 +10,7 @@ export function DayWorkout(props){
             <Esercizio idx="1"/>
             <Button
             style={styles.bottone}
-            title="Aggiungi esercizio"
+            title="Aggiungi nuovo esercizio"
             />
         </View>
     )

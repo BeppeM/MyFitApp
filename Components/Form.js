@@ -11,8 +11,6 @@ export default function(props){
     )
 }
 
-
-
 const styles = StyleSheet.create({
     textInput:{
         borderColor: 'white',
