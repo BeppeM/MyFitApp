@@ -15,11 +15,8 @@ import SetRep from "./SetRep";
 import { dailyExercisesContext } from "./DayWorkout";
 
 export function Esercizio({day, ...props}) {
-  const [dailyExercises, setDailyExercises] = useContext(dailyExercisesContext);
-  //{console.log("Mostraa: ")
-   //console.log(dailyExercises)
-  //}
-  //state for the excercise
+  const dailyExercises = useContext(dailyExercisesContext);
+//state for the excercise form
   const [exercise, setExercise] = useState({
     title: "",
     setNum: 0,
@@ -32,7 +29,16 @@ export function Esercizio({day, ...props}) {
     exercise.setNum !== 0 &&
     exercise.repNum !== 0
   }
-  //returning component
+//Method to add exercise to the main JSON object
+  const update= () => {
+//updating exercises of the day
+    dailyExercises.current[`${props.idx}`]= exercise
+    console.log("Exercise added: ")
+    console.log(dailyExercises)
+//updating exercises number
+    props.updateNumExercises(props.idx)
+  }
+//returning component
   return (
     <View style={styles.exerciseView}>
       <View style={styles.saveButton}>
@@ -40,9 +46,8 @@ export function Esercizio({day, ...props}) {
           onPress={() => {
             checkForm() ? 
 //Gestire questa parte
-            setDailyExercises(dailyExercises[props.idx]={ 
-              pippo: 1, 
-              [props.idx]: exercise, })  :
+            update()
+            :
             alertExercise()
           }}
         />

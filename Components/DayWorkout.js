@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, createContext, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,19 +10,26 @@ import { Button } from "react-native-elements";
 import { custom } from "./custom";
 import { Esercizio } from "./Esercizio";
 
-//creating context
+
+//creating context to use into Esercizio.js
 export const dailyExercisesContext = createContext();
 
 export function DayWorkout(props) {
   const [numExercisesDone, setNumExercisesDone] = useState(0);
-  const [dailyExercises, setDailyExercises] = useState({});
+//JSON object to memorize all the exercises of the current day
+  const dailyExercises= useRef({});
+  
   return (
-    <dailyExercisesContext.Provider value={ [dailyExercises, setDailyExercises] }>
+    <dailyExercisesContext.Provider value={ dailyExercises }>
       <View style={styles.dayView}>
         <Text style={custom.text}>Giorno {props.day}:</Text>
-
+{
+//Qui vanno messe le Card degli esercizi che ho già inserito!!
+        console.log(numExercisesDone)
+}
         <Esercizio
           idx={numExercisesDone + 1}
+          updateNumExercises={setNumExercisesDone}
         />
 
         {console.log(
