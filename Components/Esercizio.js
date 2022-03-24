@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,11 +12,16 @@ import Form from "./Form";
 import { Button } from "react-native-elements";
 import { custom } from "./custom";
 import SetRep from "./SetRep";
+import { dailyExercisesContext } from "./DayWorkout";
 
-export function Esercizio(props) {
+export function Esercizio({day, ...props}) {
+  const [dailyExercises, setDailyExercises] = useContext(dailyExercisesContext);
+  //{console.log("Mostraa: ")
+   //console.log(dailyExercises)
+  //}
   //state for the excercise
   const [exercise, setExercise] = useState({
-    name: "",
+    title: "",
     setNum: 0,
     repNum: 0,
     description: "",
@@ -33,8 +38,11 @@ export function Esercizio(props) {
       <View style={styles.saveButton}>
         <Button title="Salva" 
           onPress={() => {
-            console.log(exercise)
-            checkForm() ? console.log("Pippo") : 
+            checkForm() ? 
+//Gestire questa parte
+            setDailyExercises(dailyExercises[props.idx]={ 
+              pippo: 1, 
+              [props.idx]: exercise, })  :
             alertExercise()
           }}
         />
@@ -61,7 +69,7 @@ function ExcerciseView({ idx, exercise, setExercise }) {
         style={styles.textInput}
         onChangeText={(text) => {
           console.log(text);
-          setExercise({ ...exercise, name: text });
+          setExercise({ ...exercise, title: text });
         }}
       />
 
