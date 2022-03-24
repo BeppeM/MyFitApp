@@ -1,54 +1,52 @@
 import { useState, useContext } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Alert
-} from "react-native";
+import { StyleSheet, Text, TextInput, View, Alert } from "react-native";
 import Form from "./Form";
 import { Button } from "react-native-elements";
 import { custom } from "./custom";
 import SetRep from "./SetRep";
 import { dailyExercisesContext } from "./DayWorkout";
 
-export function Esercizio({day, ...props}) {
+export function Esercizio({ day, ...props }) {
+  //dailiExercises preso da DayWorkout per memorizzare l'esercizio corrente
   const dailyExercises = useContext(dailyExercisesContext);
-//state for the excercise form
+
+  //state for the excercise form
   const [exercise, setExercise] = useState({
     title: "",
     setNum: 0,
     repNum: 0,
     description: "",
   });
-//Function to check if form is empty
-  const checkForm= () =>{
-    return exercise.name !== "" &&
-    exercise.setNum !== 0 &&
-    exercise.repNum !== 0
-  }
-//Method to add exercise to the main JSON object
-  const update= () => {
-//updating exercises of the day
-    dailyExercises.current[`${props.idx}`]= exercise
-    console.log("Exercise added: ")
-    console.log(dailyExercises)
-//updating exercises number
-    props.updateNumExercises(props.idx)
-  }
-//returning component
+
+  //Function to check if form is empty
+  const checkForm = () => {
+    return (
+      exercise.name !== "" && exercise.setNum !== 0 && exercise.repNum !== 0
+    );
+  };
+
+  //Method to add exercise to the main JSON object
+  const update = () => {
+    //updating exercises of the day
+    dailyExercises.current.push(exercise);
+    console.log("Exercise added: ");
+    console.log(dailyExercises);
+    //Closing Esercizio component
+    props.setEsVisibility();
+    //updating exercises number
+    props.updateNumExercises(props.idx);
+  };
+  //returning component
   return (
     <View style={styles.exerciseView}>
       <View style={styles.saveButton}>
-        <Button title="Salva" 
+        <Button
+          title="Salva"
           onPress={() => {
-            checkForm() ? 
-//Gestire questa parte
-            update()
-            :
-            alertExercise()
+            checkForm()
+              ? //Gestire questa parte
+                update()
+              : alertExercise();
           }}
         />
       </View>
@@ -63,7 +61,6 @@ export function Esercizio({day, ...props}) {
 
 //Componente per mostrare tutto il form per inserire l'esercizio
 function ExcerciseView({ idx, exercise, setExercise }) {
-
   return (
     <View>
       <Text style={[custom.text, { alignSelf: "center" }]}>
@@ -78,8 +75,8 @@ function ExcerciseView({ idx, exercise, setExercise }) {
         }}
       />
 
-      <SetRep titolo="Set " exercise={exercise} setValue={setExercise} sr={0}/>
-      <SetRep titolo="Rep" exercise={exercise} setValue={setExercise} sr={1}/>
+      <SetRep titolo="Set " exercise={exercise} setValue={setExercise} sr={0} />
+      <SetRep titolo="Rep" exercise={exercise} setValue={setExercise} sr={1} />
 
       <Text style={custom.text}>Descrizione:</Text>
       <TextInput
@@ -89,7 +86,7 @@ function ExcerciseView({ idx, exercise, setExercise }) {
         placeholder=""
         onChangeText={(text) => {
           console.log(text);
-          setExercise({...exercise, description: text});
+          setExercise({ ...exercise, description: text });
         }}
       />
     </View>
@@ -98,18 +95,14 @@ function ExcerciseView({ idx, exercise, setExercise }) {
 
 //alert appears when click on save but the form is empty
 const alertExercise = () =>
-    Alert.alert(
-      "Attenzione!",
-      "Inserisci tutti i campi dell'esercizio",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel"
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
+  Alert.alert("Attenzione!", "Inserisci tutti i campi dell'esercizio", [
+    {
+      text: "Cancel",
+      onPress: () => console.log("Cancel Pressed"),
+      style: "cancel",
+    },
+    { text: "OK", onPress: () => console.log("OK Pressed") },
+  ]);
 
 const styles = StyleSheet.create({
   exerciseView: {
@@ -134,8 +127,7 @@ const styles = StyleSheet.create({
   },
   //Pulsante per salvare l'esercizio
   saveButton: {
-    flexDirection: 'row',
+    flexDirection: "row",
     justifyContent: "flex-end",
   },
 });
-

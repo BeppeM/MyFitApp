@@ -1,5 +1,5 @@
 //Component for numericInput for sets and reps of an excercise
-
+//Usato solo nel componente Esercizio!
 import NumericInput from "react-native-numeric-input";
 import {
     StyleSheet,
