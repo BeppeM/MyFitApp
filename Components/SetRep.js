@@ -1,3 +1,5 @@
+//Component for numericInput for sets and reps of an excercise
+
 import NumericInput from "react-native-numeric-input";
 import {
     StyleSheet,
@@ -8,7 +10,11 @@ import {
     ScrollView,
   } from "react-native";
 import { custom } from "./custom";
-export default function SetRep(props){
+/**
+ * sr=0 -> NumeriInput for set
+ * sr=1 -> NumeriInput for rep
+ */
+export default function SetRep({exercise, sr, ...props}){
     return (
         <View style={styles.rowFlex}>
           <Text style={custom.text}>{props.titolo}:</Text>
@@ -18,7 +24,10 @@ export default function SetRep(props){
             rounded
             onChange={(value) => {
               console.log(value);
-              props.setValue(value);
+              sr === 0 ?
+              props.setValue({...exercise, setNum: value})
+              :
+              props.setValue({...exercise, repNum: value})
             }}
           />
         </View>

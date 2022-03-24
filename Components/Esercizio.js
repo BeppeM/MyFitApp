@@ -6,51 +6,98 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Alert
 } from "react-native";
 import Form from "./Form";
 import { Button } from "react-native-elements";
 import { custom } from "./custom";
 import SetRep from "./SetRep";
+
 export function Esercizio(props) {
-  //nome esercizio
-  const [nomeEs, setNome] = useState("");
-  //numero di serie
-  const [numSerie, setNumSerie] = useState(0);
-  //numero di ripetizioni
-  const [repNum, setRepNum] = useState(0);
-  //descrizione allenamento
-  const [description, setDescription] = useState(0);
-  const password="";
+  //state for the excercise
+  const [exercise, setExercise] = useState({
+    name: "",
+    setNum: 0,
+    repNum: 0,
+    description: "",
+  });
+//Function to check if form is empty
+  const checkForm= () =>{
+    return exercise.name !== "" &&
+    exercise.setNum !== 0 &&
+    exercise.repNum !== 0
+  }
+  //returning component
   return (
-    <TouchableOpacity>
-      <View style={styles.exerciseView}>
-        <Text style={[custom.text, { alignSelf: "center" }]}>
-          Esercizio {props.idx}:
-        </Text>
-        <Text style={custom.text}>Titolo esercizio:</Text>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={(text) => {
-            console.log(text);
-            setNome(text);
+    <View style={styles.exerciseView}>
+      <View style={styles.saveButton}>
+        <Button title="Salva" 
+          onPress={() => {
+            console.log(exercise)
+            checkForm() ? console.log("Pippo") : 
+            alertExercise()
           }}
         />
-
-        <SetRep titolo="Set " setValue={setNumSerie}/>
-        <SetRep titolo="Rep" setValue={setRepNum}/>
-
-        <Text style={custom.text}>Descrizione:</Text>
-        <TextInput
-          style={styles.textInput}
-          multiline
-          numberOfLines={4}
-          placeholder=""
-          onChangeText={(text) => setDescription(text)}
-        />
       </View>
-    </TouchableOpacity>
+      <ExcerciseView
+        idx={props.idx}
+        exercise={exercise}
+        setExercise={setExercise}
+      />
+    </View>
   );
 }
+
+//Componente per mostrare tutto il form per inserire l'esercizio
+function ExcerciseView({ idx, exercise, setExercise }) {
+
+  return (
+    <View>
+      <Text style={[custom.text, { alignSelf: "center" }]}>
+        Esercizio {idx}:
+      </Text>
+      <Text style={custom.text}>Titolo esercizio:</Text>
+      <TextInput
+        style={styles.textInput}
+        onChangeText={(text) => {
+          console.log(text);
+          setExercise({ ...exercise, name: text });
+        }}
+      />
+
+      <SetRep titolo="Set " exercise={exercise} setValue={setExercise} sr={0}/>
+      <SetRep titolo="Rep" exercise={exercise} setValue={setExercise} sr={1}/>
+
+      <Text style={custom.text}>Descrizione:</Text>
+      <TextInput
+        style={styles.textInput}
+        multiline
+        numberOfLines={4}
+        placeholder=""
+        onChangeText={(text) => {
+          console.log(text);
+          setExercise({...exercise, description: text});
+        }}
+      />
+    </View>
+  );
+}
+
+//alert appears when click on save but the form is empty
+const alertExercise = () =>
+    Alert.alert(
+      "Attenzione!",
+      "Inserisci tutti i campi dell'esercizio",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
+
 const styles = StyleSheet.create({
   exerciseView: {
     flex: 1,
@@ -61,6 +108,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     borderRadius: 5,
   },
+  //Campi input per l'esercizio
   textInput: {
     borderColor: "white",
     borderWidth: 1,
@@ -71,21 +119,10 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     color: "white",
   },
+  //Pulsante per salvare l'esercizio
+  saveButton: {
+    flexDirection: 'row',
+    justifyContent: "flex-end",
+  },
 });
 
-const Ninput = (props) => {
-  return (
-    <View style={styles.rowFlex}>
-      <Text style={custom.text}>Rep:</Text>
-      <NumericInput
-        minValue={0}
-        containerStyle={styles.numInput}
-        rounded
-        onChange={(value) => {
-          console.log(value);
-          props.setValue(value);
-        }}
-      />
-    </View>
-  );
-};

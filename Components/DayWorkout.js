@@ -1,16 +1,23 @@
+import { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 import { custom } from './custom';
 import { Esercizio } from './Esercizio';
 
 export function DayWorkout(props){
+    const [numExercisesDone, setNumExercisesDone] = useState(0);
     return (
         <View style={styles.dayView}>
             <Text style={custom.text}>Giorno {props.day}:</Text>
-            <Esercizio idx="1"/>
+
+            <Esercizio idx={numExercisesDone + 1}/>
+
             <Button
             style={styles.bottone}
             title="Aggiungi nuovo esercizio"
+            onPress={() =>{
+                console.log("Adding new exercise tile")
+            }}
             />
         </View>
     )
