@@ -23,7 +23,7 @@ export default function SetRep({exercise, sr, ...props}){
             containerStyle={styles.numInput}
             rounded
             onChange={(value) => {
-              console.log(value);
+              //console.log(value);
               sr === 0 ?
               props.setValue({...exercise, setNum: value})
               :

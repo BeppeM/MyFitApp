@@ -8,20 +8,33 @@ import {
 import { custom } from "../Components/custom.js";
 import Form from "../Components/Form";
 import { Button } from "react-native-elements";
-import { useState } from "react";
-import { DayWorkout } from "../Components/DayWorkout.js";
-export default function AddWorkout(props) {
-  const [days, setDays] = useState(0);
-  //Memorizzo il nome dell'allenamento
-  const [workName, setWorkName] = useState("");
+import { useRef, useState } from "react";
+import { DayWorkout, getExercises } from "../Components/DayWorkout.js";
 
+export default function AddWorkout(props) {
+  //Memorizzo il nome dell'allenamento
+  const [workoutName, setWorkoutName] = useState("");
+
+  //Main JSON object to store the workout days
+  const [workoutDays, setWorkoutDays] = useState([]);
+  //Number of days to workout
+  const [numDays, setNumDays] = useState(0);
   return (
     <View style={custom.cardContainer}>
+    {console.log("Giorno dei workout: ")}
+    {console.log(workoutDays)}
       <ScrollView>
         <View style={custom.cardContainer}>
-          <Form desc="titolo workout" onNewValue={setWorkName} />
-          <DayWorkout day="1" />
-          <Button title="AddDay" onPress={() => setDays(days + 1)} />
+          <Form desc="titolo workout" onNewValue={setWorkoutName} />
+          <DayWorkout day={numDays + 1} />
+
+          <Button
+            title="Aggiungi giorno"
+            onPress={() => {
+              setNumDays(numDays + 1);
+              setWorkoutDays(getExercises(1))
+            }}
+          />
         </View>
         <Button
           title="Aggiungi workout"

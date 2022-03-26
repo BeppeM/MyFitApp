@@ -1,7 +1,7 @@
 //Componente per poter aggiungere un giorno di worout all'allenamento
 //Include il componente Esercizio
 
-import { useState, createContext, useRef } from "react";
+import { useState, useRef } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,42 +11,50 @@ import {
 import { Button } from "react-native-elements";
 import { custom } from "./custom";
 import { Esercizio } from "./Esercizio";
-import { CardExercise } from './CardExercise'
+import { PureCardExercise } from './CardExercise'
 
 //creating context to use into Esercizio.js
-export const dailyExercisesContext = createContext();
+//export const dailyExercisesContext = createContext();
+
+
+//JSON object to memorize all the exercises of the current day
+export let dailyExercises;
 
 export function DayWorkout(props) {
 //Number of exercises added to the day workout
   const [numExercisesDone, setNumExercisesDone] = useState(0);
-//JSON object to memorize all the exercises of the current day
-  const dailyExercises = useRef([]);
+
+  //Initialization with useRef hook
+  dailyExercises = useRef([]);
+
 //esVisibility used to hide and show exercise form
   const [esVisibility, setEsVisibility] = useState(false);
 
   return (
-    <dailyExercisesContext.Provider value={dailyExercises}>
       <View style={styles.dayView}>
         <Text style={custom.text}>Giorno {props.day}:</Text>
         {
 //Aggiustare il design di CardExercise
-//passati con map func. tutti gli esercizi aggiunti 
-//Aggiungere memo per migliorare le performance
-            dailyExercises.current.map((exercise) =>
-                <CardExercise exercise={exercise}/>
+//Show all the exercises of the current day added
+            dailyExercises.current.map((exercise, i) =>
+                <PureCardExercise key={i} exercise={exercise}/>
             )
         }
         {
 //Exercise form hide/show
+//Passing the main JSON obj to store data
         esVisibility && (
           <Esercizio
             setEsVisibility={setEsVisibility}
             idx={numExercisesDone + 1}
             updateNumExercises={setNumExercisesDone}
+            dailyExercises = {dailyExercises}
           />
         )}
+
         {console.log("Vedo gli esercizi salvati: ")}
-        {console.log(dailyExercises.current)}
+        {console.log(dailyExercises.current[0])}
+
         <Button
           style={styles.bottone}
           title="Aggiungi nuovo esercizio"
@@ -56,9 +64,20 @@ export function DayWorkout(props) {
           }}
         />
       </View>
-    </dailyExercisesContext.Provider>
   );
 }
+
+//Send the exercises of the current day to the AddWorkout screen
+//Method performed when is clicked the button "Aggiungi Giorno"
+export const getExercises = (num) =>{
+  console.log("Workout in arrivo bitch: ")
+  let s= '"giorno1":'
+  s+= JSON.stringify(dailyExercises.current)
+  console.log(s);
+  let res=JSON.stringify(s)
+  //console.log(JSON.parse(res));
+  return JSON.parse(res);
+};
 
 const styles = StyleSheet.create({
   dayView: {

@@ -4,12 +4,9 @@ import Form from "./Form";
 import { Button } from "react-native-elements";
 import { custom } from "./custom";
 import SetRep from "./SetRep";
-import { dailyExercisesContext } from "./DayWorkout";
+import { WorkoutContext } from "../screens/AddWorkout";
 
-export function Esercizio({ day, ...props }) {
-  //dailiExercises preso da DayWorkout per memorizzare l'esercizio corrente
-  const dailyExercises = useContext(dailyExercisesContext);
-
+export function Esercizio({ day, dailyExercises, ...props }) {
   //state for the excercise form
   const [exercise, setExercise] = useState({
     title: "",
@@ -70,7 +67,7 @@ function ExcerciseView({ idx, exercise, setExercise }) {
       <TextInput
         style={styles.textInput}
         onChangeText={(text) => {
-          console.log(text);
+          //console.log(text);
           setExercise({ ...exercise, title: text });
         }}
       />
@@ -85,7 +82,7 @@ function ExcerciseView({ idx, exercise, setExercise }) {
         numberOfLines={4}
         placeholder=""
         onChangeText={(text) => {
-          console.log(text);
+          //console.log(text);
           setExercise({ ...exercise, description: text });
         }}
       />

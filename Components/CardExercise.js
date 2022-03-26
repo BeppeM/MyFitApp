@@ -1,9 +1,10 @@
+import { memo } from "react";
 import {
     StyleSheet,
     Text,
     View,
   } from "react-native";
-export function CardExercise({ exercise }){
+function CardExercise({ exercise }){
     console.log("Bella bronsky")
     return(
         <View style={styles.exerciseCard}>
@@ -25,3 +26,5 @@ const styles = StyleSheet.create({
       borderRadius: 5,
     },
 })
+
+export const PureCardExercise = memo(CardExercise);
