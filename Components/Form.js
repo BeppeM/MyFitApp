@@ -16,12 +16,11 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderWidth: 1,
         alignSelf: 'flex-start',
-        width: "95%",
-        margin: 8,
+        width: "100%",
         padding: 5,
         borderRadius: 5,
     },
     container: {
-        margin: 8,
+        margin: 5,
     }
 });

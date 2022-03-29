@@ -2,7 +2,7 @@ import {View, Text, TextInput, StyleSheet} from 'react-native';
 import {custom, buttonStyle} from './custom.js';
 import {Button} from 'react-native-elements';
 
-//Card for showing all user workouts
+//Card for showing all user workouts stored on firestore
 export default function Card(props){
     return (
         <View style={custom.card} key={props.uuid}>

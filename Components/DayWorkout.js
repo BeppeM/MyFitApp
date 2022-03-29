@@ -1,7 +1,7 @@
 //Componente per poter aggiungere un giorno di worout all'allenamento
 //Include il componente Esercizio
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -34,11 +34,13 @@ export function DayWorkout(props) {
       <View style={styles.dayView}>
         <Text style={custom.text}>Giorno {props.day}:</Text>
         {
+          dailyExercises.current !== [] ?
 //Aggiustare il design di CardExercise
 //Show all the exercises of the current day added
             dailyExercises.current.map((exercise, i) =>
                 <PureCardExercise key={i} exercise={exercise}/>
-            )
+            ) : 
+            <></>
         }
         {
 //Exercise form hide/show
@@ -52,8 +54,10 @@ export function DayWorkout(props) {
           />
         )}
 
-        {console.log("Vedo gli esercizi salvati: ")}
-        {console.log(dailyExercises.current[0])}
+        {//console.log("Vedo gli esercizi salvati: ")
+        }
+        {//console.log(dailyExercises.current[0])
+        }
 
         <Button
           style={styles.bottone}
@@ -70,12 +74,15 @@ export function DayWorkout(props) {
 //Send the exercises of the current day to the AddWorkout screen
 //Method performed when is clicked the button "Aggiungi Giorno"
 export const getExercises = (num) =>{
-  console.log("Workout in arrivo bitch: ")
-  let s= '"giorno1":'
+  //console.log("Workout in arrivo bitch: ")
+  let s= `"Giorno${num}":`
+  console.log(dailyExercises.current[0])
+  if(dailyExercises.current[0] === undefined)
+    return []
   s+= JSON.stringify(dailyExercises.current)
   console.log(s);
   let res=JSON.stringify(s)
-  //console.log(JSON.parse(res));
+  dailyExercises.current= [];
   return JSON.parse(res);
 };
 
