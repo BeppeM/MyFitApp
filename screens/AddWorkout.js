@@ -32,13 +32,7 @@ export default function AddWorkout(props) {
       <ScrollView>
         <View style={custom.cardContainer}>
           <Form desc="titolo workout" onNewValue={setWorkoutName} />      
-          {        
-            (console.log("O shit!!"),
-            workoutDays.current.map((work, i) =>{
-              return <PureDayCard key={i} workDay={work}/>
-            })
-            )            
-          }
+          
           <DayWorkout day={numDays + 1} />
 
           <Button
@@ -48,9 +42,9 @@ export default function AddWorkout(props) {
               let data = getExercises(numDays + 1);
               console.log("Dati: ")
               console.log(data)
-              data[0] !== [] && data[0] !== undefined
+              data!== null && data !== undefined
                 ? //Pushing data
-                  (                  
+                  (        
                   workoutDays.current.push(data),
                   //Update days
                   setNumDays(numDays + 1))
@@ -59,6 +53,13 @@ export default function AddWorkout(props) {
             }}
           />
         </View>
+        {        
+            (console.log("O shit!!"),
+            workoutDays.current.map((work, i) =>{
+              return <PureDayCard key={i} workDay={work}/>
+            })
+            )            
+          }
         <Button
           title="Aggiungi workout"
           onPress={() => console.log("Workout aggiunto")}

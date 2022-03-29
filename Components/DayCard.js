@@ -5,13 +5,15 @@ import { memo } from "react";
 import { PureCardExercise } from "./CardExercise";
 //into the screen AddWorkout
 function DayCard({ workDay }) {
-  {
-    console.log("Entra")
-  }
+  console.log("Entra")
+  let key=getKey(workDay);
   return (
     <View>
+    <Text>{key}</Text>
       {(console.log("Pippo"),
-        console.log(getKey(JSON.stringify(workDay)))
+        workDay[key].map((exercise) =>{
+          return <PureCardExercise exercise={exercise}/>
+        })
         )
       }
     </View>

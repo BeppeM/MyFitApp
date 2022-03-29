@@ -74,15 +74,19 @@ export function DayWorkout(props) {
 //Method performed when is clicked the button "Aggiungi Giorno"
 export const getExercises = (num) =>{
   //console.log("Workout in arrivo bitch: ")
-  let s= `"Giorno${num}":`
+  let s= `{"Giorno${num}":`
   console.log(dailyExercises.current[0])
+//dailyExercises is empty
   if(dailyExercises.current[0] === undefined)
-    return []
+    return null
+//ELSE Converting JSON object into string and append
   s+= JSON.stringify(dailyExercises.current)
-  console.log(s);
-  let res=JSON.stringify(s)
+  s+="}"
+  console.log(s);  
+  //let res=JSON.stringify(s)
   dailyExercises.current= [];
-  return JSON.parse(res);
+//Converting JSON string into JSON object
+  return JSON.parse(s)
 };
 
 const styles = StyleSheet.create({
