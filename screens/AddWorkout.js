@@ -1,9 +1,11 @@
+//Screen used to add a new Workout of the user
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   ScrollView,
+  Alert
 } from "react-native";
 import { custom } from "../Components/custom.js";
 import Form from "../Components/Form";
@@ -12,31 +14,30 @@ import { useEffect, useRef, useState } from "react";
 import { DayWorkout, getExercises } from "../Components/DayWorkout.js";
 import Card from "../Components/Card.js";
 import { PureDayCard } from "../Components/DayCard.js";
-import {Alert} from 'react';
+
+
 export default function AddWorkout(props) {
   //Memorizzo il nome dell'allenamento
   const [workoutName, setWorkoutName] = useState("");
 
   //Main JSON object to store the workout days
-  const workoutDays = useRef([]);
+  const workoutDays= useRef([]);
   //Number of days to workout
   const [numDays, setNumDays] = useState(0);
-  useEffect(() => {
-    console.log("Rerendering in corso!!")
-  }, [workoutDays.current]);
+
   return (
     <View style={custom.cardContainer}>
       {console.log("Giorno dei workout: ")}
       {console.log(workoutDays.current)}
       <ScrollView>
         <View style={custom.cardContainer}>
-          <Form desc="titolo workout" onNewValue={setWorkoutName} />
-          {console.log("Let's see")}
-          {
-            //Card of the day the user just added!!
-            workoutDays.current.map((day, i) => {
-              <PureDayCard key={i} workDay={day}/>
+          <Form desc="titolo workout" onNewValue={setWorkoutName} />      
+          {        
+            (console.log("O shit!!"),
+            workoutDays.current.map((work, i) =>{
+              return <PureDayCard key={i} workDay={work}/>
             })
+            )            
           }
           <DayWorkout day={numDays + 1} />
 
@@ -45,19 +46,16 @@ export default function AddWorkout(props) {
             onPress={() => {
               //Retrieve exercises of the Day just added
               let data = getExercises(numDays + 1);
-              data !== [] && data !== undefined
+              console.log("Dati: ")
+              console.log(data)
+              data[0] !== [] && data[0] !== undefined
                 ? //Pushing data
-                  (
-                  console.log(data),
+                  (                  
                   workoutDays.current.push(data),
                   //Update days
                   setNumDays(numDays + 1))
-                : //Error alert
-                (
-                  console.log("pippoooo"),
+                : //Error alert              
                   alertExercise()
-
-                )
             }}
           />
         </View>

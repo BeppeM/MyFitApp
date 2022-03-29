@@ -1,6 +1,5 @@
-//Componente per poter aggiungere un giorno di worout all'allenamento
+//Componente per poter aggiungere un giorno al workout all'allenamento
 //Include il componente Esercizio
-
 import { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
