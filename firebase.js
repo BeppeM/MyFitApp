@@ -37,8 +37,15 @@ export const db = getFirestore();
 
 //ref
 const workRef= collection(db, "workouts");
-//query
+
+//query to get the personal workouts of the user
 export const queryWorkout =(email) => 
-query(workRef, where("users", "array-contains", email));
+query(workRef, where("owner", "==", email));
+
 //Read data
 export const readWorkouts= (q) => getDocs(q)
+
+//Write workout of the user into firestore
+export const writeUserWorkout= async (workout) =>{
+  await setDoc(workRef, workout);
+}

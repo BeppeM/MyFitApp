@@ -22,8 +22,6 @@ export default function MyTrainings({navigation}){
       //Getting data from firestore
       console.log("Fetching workouts of: " + email + " from firestore")
       reading(email, setWorkouts);      
-      //Rerender
-      console.log("Bella ciao!!");
     }, []);
 
 //MyTraining component

@@ -19,10 +19,13 @@ import { PureCardExercise } from './CardExercise'
 //JSON object to memorize all the exercises of the current day
 export let dailyExercises;
 
+let resetNumExercisesDone;
+
 export function DayWorkout(props) {
 //Number of exercises added to the day workout
   const [numExercisesDone, setNumExercisesDone] = useState(0);
-
+//Assegnamento per resettare quando ho finito il giorno  
+  resetNumExercisesDone = setNumExercisesDone;
   //Initialization with useRef hook
   dailyExercises = useRef([]);
 
@@ -85,9 +88,13 @@ export const getExercises = (num) =>{
   console.log(s);  
   //let res=JSON.stringify(s)
   dailyExercises.current= [];
+//Resetting number of exercises  
+  resetNumExercisesDone(0);
 //Converting JSON string into JSON object
   return JSON.parse(s)
 };
+
+
 
 const styles = StyleSheet.create({
   dayView: {

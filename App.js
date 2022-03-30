@@ -28,6 +28,10 @@ function Pippo(){
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen 
+            name="Login" 
+            component={Login}
+          />
           <Stack.Screen 
             name="MyTrainings" 
             component={MyTrainings}
