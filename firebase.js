@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { 
   getFirestore, where, 
   collection, getDocs, 
-  addDoc, query } from "firebase/firestore";
+  addDoc, query, setDoc, doc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -47,5 +47,9 @@ export const readWorkouts= (q) => getDocs(q)
 
 //Write workout of the user into firestore
 export const writeUserWorkout= async (workout) =>{
-  await setDoc(workRef, workout);
+  await setDoc(doc(db, "workouts", workout.title),{
+    owner: workout.owner,
+    title: workout.title,
+    allenamento: workout.allenamento
+  });
 }

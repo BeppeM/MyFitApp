@@ -71,7 +71,7 @@ export default function AddWorkout(props) {
         <Button
           title="Aggiungi workout"
           onPress={workoutName !== "" && workoutDays.current[0] !== undefined
-          ? () => addWorkout(workoutName) 
+          ? () => addWorkout(workoutName, props.navigation) 
           : alertTitle}
         />
       </ScrollView>
@@ -91,7 +91,7 @@ const alertDay = () =>
   ]);
 
 //Costruzione del JSON object
-const addWorkout = async (workoutName) =>{
+const addWorkout = async (workoutName, navigation) =>{
   let s= `{"title": "${workoutName}",`
   s+=`"owner": "${emailJSON}",`
   s+= `"allenamento":`
@@ -100,7 +100,10 @@ const addWorkout = async (workoutName) =>{
   console.log("Workout aggiunto con successo");
   console.log(workoutName);
   console.log(JSON.parse(s));
-  writeUserWorkout(JSON.parse(s));
+  writeUserWorkout(JSON.parse(s)).then((message) =>{
+    console.log("Fatto bitch!");
+    navigation.goBack()
+  });
 }
 
 //alert appears when click on Aggiungi workout ma il titolo è vuoto
