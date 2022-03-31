@@ -10,6 +10,7 @@ import WorkoutDetails from './screens/WorkoutDetails.js';
 import auth from './firebase.js';
 import { createContext, useState } from 'react';
 import AddWorkout from './screens/AddWorkout.js';
+import { custom } from './styles.js';
 //Navigation into the app
 const Stack = createNativeStackNavigator();
 //Creating the context
@@ -19,7 +20,7 @@ export default function App() {
   const [email, setEmail] = useState("");
   return (
     <appContext.Provider value= {{email, setEmail}}>
-      <Pippo/>
+      <Pippo styles={custom.container}/>
     </appContext.Provider>
   );
 }
