@@ -1,16 +1,28 @@
-//Card used to show the exercises added from the user 
+//Card used to show the exercises added from the user
 //into the screen AddWorkout
 
 import { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { custom } from "../styles.js";
 function CardExercise({ exercise }) {
-
   return (
-    <View style={styles.exerciseCard}>
-      <Text>{exercise.title}</Text>
-      <Text>{exercise.setNum}</Text>
-      <Text>{exercise.repNum}</Text>
-      <Text>{exercise.description}</Text>
+    <View style={custom.cardExercise}>
+      <Text style={{ ...custom.text, alignSelf: "center" }}>
+        {exercise.title}
+      </Text>
+      <Text style={{ ...custom.text, fontSize: 15 }}>
+        Sets: {exercise.setNum}
+      </Text>
+      <Text style={{ ...custom.text, fontSize: 15 }}>
+        Reps: {exercise.repNum}
+      </Text>
+      {exercise.description !== "" ? (
+        <Text style={{ ...custom.text, fontSize: 15 }}>
+          {`Descrizione: ${exercise.description}`}
+        </Text>
+      ) : (
+        <></>
+      )}
     </View>
   );
 }

@@ -8,8 +8,8 @@ import {
   ScrollView,
 } from "react-native";
 import { Button } from "react-native-elements";
-import { custom } from "./custom";
-import { Esercizio } from "./Esercizio";
+import { custom } from "../styles.js";
+import { AddExercise } from "./AddExercise";
 import { PureCardExercise } from './CardExercise'
 
 //creating context to use into Esercizio.js
@@ -21,7 +21,7 @@ export let dailyExercises;
 
 let resetNumExercisesDone;
 
-export function DayWorkout(props) {
+export function AddDayWorkout(props) {
 //Number of exercises added to the day workout
   const [numExercisesDone, setNumExercisesDone] = useState(0);
 //Assegnamento per resettare quando ho finito il giorno  
@@ -33,7 +33,7 @@ export function DayWorkout(props) {
   const [esVisibility, setEsVisibility] = useState(false);
 
   return (
-      <View style={styles.dayView}>
+      <View style={custom.cardContainer}>
         <Text style={custom.text}>Giorno {props.day}:</Text>
         {
           dailyExercises.current !== [] ?
@@ -48,18 +48,13 @@ export function DayWorkout(props) {
 //Exercise form hide/show
 //Passing the main JSON obj to store data
         esVisibility && (
-          <Esercizio
+          <AddExercise
             setEsVisibility={setEsVisibility}
             idx={numExercisesDone + 1}
             updateNumExercises={setNumExercisesDone}
             dailyExercises = {dailyExercises}
           />
         )}
-
-        {//console.log("Vedo gli esercizi salvati: ")
-        }
-        {//console.log(dailyExercises.current[0])
-        }
 
         <Button
           style={styles.bottone}

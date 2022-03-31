@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { appContext } from "../App.js";
-import { custom } from "../Components/custom.js";
+import { custom } from "../styles.js";
 import Card from "../Components/Card.js";
 import uuid from "react-native-uuid";
 import { FAB } from "react-native-paper";
@@ -33,8 +33,8 @@ export default function MyTrainings({ navigation }) {
 
   //MyTraining component
   return (
-    <View style={custom.cardContainer}>
-      <Text>Ci siamo {email}</Text>
+    <View style={custom.background}>
+      <Text style={custom.text}>Ci siamo {email}</Text>
       <ScrollView>
         {workouts === [] ? (
           <Text>Loading...</Text>
@@ -60,7 +60,7 @@ export default function MyTrainings({ navigation }) {
 //Components to show workouts' cards
 function Workouts({ workouts, navigation }) {
   return workouts.map((workout) => (
-    <TouchableOpacity
+    <TouchableOpacity      
       onPress={() => {
         navigation.navigate("WorkoutDetails", {
           workout: workout,
@@ -68,7 +68,7 @@ function Workouts({ workouts, navigation }) {
       }}
       underlayColor="white"
     >
-      <Card uuid={workout.id} title={workout.title} goal={workout.goal} />
+      <Card custom={custom} uuid={workout.id} title={workout.title} goal={workout.goal} />
     </TouchableOpacity>
   ));
 }
@@ -98,6 +98,6 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: "#002f6c",
+    backgroundColor: "#5e92f3",
   },
 });

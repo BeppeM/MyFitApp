@@ -1,13 +1,13 @@
 import {View, Text, TextInput, StyleSheet} from 'react-native';
-import {custom, buttonStyle} from './custom.js';
+import {custom, buttonStyle} from '../styles.js';
 import {Button} from 'react-native-elements';
 
 //Card for showing all user workouts stored on firestore
-export default function Card(props){
+export default function Card({custom, ...props}){
     return (
-        <View style={custom.card} key={props.uuid}>
-            <Text style={styles.textStyle}>{props.title}</Text>
-            <Text style={styles.textStyle}>{props.goal}</Text>
+        <View style={custom.cardContainer} key={props.uuid}>
+            <Text style={{style: custom.text, alignSelf: 'center'}}>{props.title}</Text>
+            <Text style={{style: custom.text, alignSelf: 'center'}}>{props.goal}</Text>
             <Button
                 title="Elimina"
                 titleStyle={{ fontWeight: 'bold' }}
@@ -21,15 +21,6 @@ export default function Card(props){
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    textStyle: {
-        margin: 8,
-        fontSize: 20,
-        alignSelf: 'center',
-    }
-})
-
 
 //Button style for the inner container
 const containerStyle={containerStyle: {

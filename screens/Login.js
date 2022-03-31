@@ -4,7 +4,7 @@ import {appContext} from '../App.js';
 import {useState, useContext} from 'react';
 import {Button} from 'react-native-elements';
 //style
-import {custom, buttonStyle} from '../styles.js';
+import {custom, buttonStyle, containerStyle} from '../styles.js';
 //firebise authentication
 import {auth} from '../firebase.js';
 import {handleLogin, handleReg} from '../firebase.js';
@@ -20,7 +20,7 @@ export default function Login({navigation}){
     const [logErr, setLogErr] = useState("");
     
     return(
-        <View style={custom.container}>
+        <View style={custom.background}>
             <Form desc="email" val={email}
                 onNewValue={ v =>{setEmail(v);}}
             />
@@ -66,12 +66,6 @@ export default function Login({navigation}){
         </View>
     )
 }
-
-//Button style for the inner container
-const containerStyle={containerStyle: {
-    alignSelf: 'center',
-    width: '50%',
-  }}
 
 //style for the login view
 const styles = StyleSheet.create({

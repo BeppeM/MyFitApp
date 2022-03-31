@@ -1,3 +1,5 @@
+//Form used to insert a new Exercise
+//It is used inside component DayWorkout
 import { useState, useContext } from "react";
 import { StyleSheet, Text, TextInput, View, Alert } from "react-native";
 import Form from "./Form";
@@ -6,7 +8,7 @@ import { custom } from "./custom";
 import SetRep from "./SetRep";
 import { WorkoutContext } from "../screens/AddWorkout";
 
-export function Esercizio({ day, dailyExercises, ...props }) {
+export function AddExercise({ day, dailyExercises, ...props }) {
   //state for the excercise form
   const [exercise, setExercise] = useState({
     title: "",

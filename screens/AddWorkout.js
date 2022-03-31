@@ -5,13 +5,14 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
-  Alert
+  Alert,
+  Pressable,
 } from "react-native";
-import { custom } from "../Components/custom.js";
+import { custom, buttonStyle, containerStyle } from "../styles.js";
 import Form from "../Components/Form";
-import { Button } from "react-native-elements";
+import { Button } from "react-native";
 import { useEffect, useRef, useState, useContext } from "react";
-import { DayWorkout, getExercises } from "../Components/DayWorkout.js";
+import { AddDayWorkout, getExercises } from "../Components/AddDayWorkout.js";
 import Card from "../Components/Card.js";
 import { PureDayCard } from "../Components/DayCard.js";
 import { appContext } from "../App.js";
@@ -21,59 +22,65 @@ import { writeUserWorkout } from "../firebase.js";
 let workoutDays;
 //variable to store email and memorize into workoutDays
 let emailJSON;
-export default function AddWorkout({navigation, route}) {
+export default function AddWorkout({ navigation, route }) {
   //Memorizzo il nome dell'allenamento
   const [workoutName, setWorkoutName] = useState("");
-  const {email} = useContext(appContext);
-//Setting email to save into json and store on firestore
-  emailJSON=email;
+  const { email } = useContext(appContext);
+  //Setting email to save into json and store on firestore
+  emailJSON = email;
   //Main JSON object to store the workout days
-  workoutDays= useRef([]);
+  workoutDays = useRef([]);
   //Number of days to workout
   const [numDays, setNumDays] = useState(0);
 
   return (
-    <View style={custom.cardContainer}>
+    <View style={custom.background}>
       {console.log(email)}
       {console.log("Giorno dei workout: ")}
       {console.log(workoutDays.current)}
       <ScrollView>
-        <View style={custom.cardContainer}>    
-          <Form desc="titolo workout" onNewValue={setWorkoutName} />      
-          
-          <DayWorkout day={numDays + 1} />
-
-          <Button
-            title="Aggiungi giorno"
+        <View style={custom.background}>
+          <Form desc="titolo workout" onNewValue={setWorkoutName} />
+          {
+            //console.log("O shit!!"),
+            workoutDays.current.map((work, i) => {
+              return <PureDayCard key={i} workDay={work} />;
+            })
+          }
+          <AddDayWorkout day={numDays + 1} />
+          <Pressable
+            style={custom.buttonStyle}
             onPress={() => {
               //Retrieve exercises of the Day just added
               let data = getExercises(numDays + 1);
-//              console.log("Dati: ")
-//              console.log(data)
-              data!== null && data !== undefined
+              //              console.log("Dati: ")
+              //              console.log(data)
+              data !== null && data !== undefined
                 ? //Pushing data
-                  (        
-                  workoutDays.current.push(data),
+                  (workoutDays.current.push(data),
                   //Update days
                   setNumDays(numDays + 1))
-                : //Error alert              
-                  alertDay()
+                : //Error alert
+                  alertDay();
             }}
-          />
+          >
+            <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
+              Aggiungi giorno
+            </Text>
+          </Pressable>
         </View>
-        {        
-            (//console.log("O shit!!"),
-            workoutDays.current.map((work, i) =>{
-              return <PureDayCard key={i} workDay={work}/>
-            })
-            )            
+        <Pressable
+          style={custom.buttonStyle}
+          onPress={
+            workoutName !== "" && workoutDays.current[0] !== undefined
+              ? () => addWorkout(workoutName, navigation, route)
+              : alertTitle
           }
-        <Button
-          title="Aggiungi workout"
-          onPress={workoutName !== "" && workoutDays.current[0] !== undefined
-          ? () => addWorkout(workoutName, navigation, route) 
-          : alertTitle}
-        />
+        >
+          <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
+            Aggiungi workout
+          </Text>
+        </Pressable>
       </ScrollView>
     </View>
   );
@@ -91,21 +98,21 @@ const alertDay = () =>
   ]);
 
 //Costruzione del JSON object
-const addWorkout = async (workoutName, navigation, route) =>{
-  let s= `{"title": "${workoutName}",`
-  s+=`"owner": "${emailJSON}",`
-  s+= `"allenamento":`
-  s+= JSON.stringify(workoutDays.current)
-  s+= "}"
+const addWorkout = async (workoutName, navigation, route) => {
+  let s = `{"title": "${workoutName}",`;
+  s += `"owner": "${emailJSON}",`;
+  s += `"allenamento":`;
+  s += JSON.stringify(workoutDays.current);
+  s += "}";
   console.log("Workout aggiunto con successo");
   console.log(workoutName);
   console.log(JSON.parse(s));
-  writeUserWorkout(JSON.parse(s)).then((message) =>{
+  writeUserWorkout(JSON.parse(s)).then((message) => {
     console.log("Fatto bitch!");
-    route.params.reading()
-    navigation.goBack()    
+    route.params.reading();
+    navigation.goBack();
   });
-}
+};
 
 //alert appears when click on Aggiungi workout ma il titolo è vuoto
 const alertTitle = () =>
