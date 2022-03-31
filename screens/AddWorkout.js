@@ -21,7 +21,7 @@ import { writeUserWorkout } from "../firebase.js";
 let workoutDays;
 //variable to store email and memorize into workoutDays
 let emailJSON;
-export default function AddWorkout(props) {
+export default function AddWorkout({navigation, route}) {
   //Memorizzo il nome dell'allenamento
   const [workoutName, setWorkoutName] = useState("");
   const {email} = useContext(appContext);
@@ -71,7 +71,7 @@ export default function AddWorkout(props) {
         <Button
           title="Aggiungi workout"
           onPress={workoutName !== "" && workoutDays.current[0] !== undefined
-          ? () => addWorkout(workoutName, props.navigation) 
+          ? () => addWorkout(workoutName, navigation, route) 
           : alertTitle}
         />
       </ScrollView>
@@ -91,7 +91,7 @@ const alertDay = () =>
   ]);
 
 //Costruzione del JSON object
-const addWorkout = async (workoutName, navigation) =>{
+const addWorkout = async (workoutName, navigation, route) =>{
   let s= `{"title": "${workoutName}",`
   s+=`"owner": "${emailJSON}",`
   s+= `"allenamento":`
@@ -102,7 +102,8 @@ const addWorkout = async (workoutName, navigation) =>{
   console.log(JSON.parse(s));
   writeUserWorkout(JSON.parse(s)).then((message) =>{
     console.log("Fatto bitch!");
-    navigation.goBack()
+    route.params.reading()
+    navigation.goBack()    
   });
 }
 

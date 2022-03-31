@@ -37,10 +37,8 @@ export default function Login({navigation}){
                 {...buttonStyle}
                 onPress= {() =>{
                     handleLogin(email, password).then((userCredential) => {
-                        // Signed in 
-                        //const user = userCredential.user;
-                        navigation.replace("MyTrainings");
-                        // ...
+                        // Signed in                         
+                        navigation.replace("MyTrainings");                    
                     })
                     .catch((error) => {
                         //const errorCode = error.code;
