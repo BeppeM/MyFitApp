@@ -11,53 +11,43 @@ import { auth } from "../firebase.js";
 import { handleLogin, handleReg } from "../firebase.js";
 
 export default function Login({ navigation }) {
-  //Get email and password from the local storage to login
-  async function getValueFor(key) {
-    let result = await SecureStore.getItemAsync(key);
-    if (result) {
-      console.log("🔐 Here's your value 🔐 \n" + result);
-      return result;
-    } else {
-      console.log("No values stored under that key.");
-      return "";
-    }
-  }
-
   //setEmail from the context because we need it for other screens
-  const { email, setEmail } = useContext(appContext);
-  const savedEmail = useRef("");
-  const [password, setPwd] = useState("");
-  console.log(savedEmail);
+  const glbEmail = useContext(appContext);
+
+  const [credLogin, setCredLog] = useState({
+    email: "",
+    password: ""
+  });
   //error in login
   const [logErr, setLogErr] = useState("");
 
-  //Try to get credentials every time the component is mounted
+/*  //Try to get credentials every time the component is mounted
+// TO DELETEEEEE
   useEffect(() => {
     getValueFor("email").then((resEmail) => {
       console.log(resEmail);
-      //setEmail(resEmail);
-      savedEmail.current= resEmail
     });
     return () => {
       console.log("unmounted");
     };
   }, []);
-
+*/
   //RETURN COMPONENT
   return (
     <View style={custom.background}>
+    {console.log(credLogin.email + " " + credLogin.password)}
       <Form
         desc="email"
-        val={email}
+        val={credLogin.email}
         onNewValue={(v) => {
-          setEmail(v);
+          setCredLog({ email: v, password: credLogin.password})
         }}
       />
       <Form
         desc="password"
-        val={password}
+        val={credLogin.password}
         onNewValue={(v) => {
-          setPwd(v);
+          setCredLog({ password: v, email: credLogin.email})
         }}
       />
       <View>
@@ -70,16 +60,18 @@ export default function Login({ navigation }) {
         {...containerStyle}
         {...buttonStyle}
         onPress={() => {
-          handleLogin(email, password)
-            .then((userCredential) => {
-              // Signed in
-              console.log("Bellaaaaa");
-              alertSaveCred(email);
+          handleLogin(credLogin.email, credLogin.password)
+            .then((userCredential) => {// Signed in 
+              //setting the global email  
+              glbEmail.current = credLogin.email
+              //saving credentials locally                         
+              alertSaveCred(credLogin);              
               navigation.replace("MyTrainings");
             })
             .catch((error) => {
               setLogErr(
-                "Errore, credenziali errate. Riprova oppure registrati"
+                error
+                //"Errore, credenziali errate. Riprova oppure registrati"
               );
             });
         }}
@@ -91,7 +83,7 @@ export default function Login({ navigation }) {
         {...containerStyle}
         {...buttonStyle}
         onPress={() => {
-          handleReg(email, password)
+          handleReg(credLogin.email, credLogin.password)
             .then((userCredential) => {
               // Signed up
               const user = userCredential.user;
@@ -101,8 +93,7 @@ export default function Login({ navigation }) {
               setLogErr(error.message);
             });
         }}
-      />
-    {savedEmail.current !== "" ? navigation.replace("MyTrainings") : null}    
+      />    
     </View>
   ) 
 }
@@ -128,7 +119,7 @@ async function save(key, value) {
 
 //alert appears when login or register button clicked
 //It lets saving the credentials
-const alertSaveCred = (email) =>
+const alertSaveCred = (credLogin) =>
   Alert.alert("Nota!", "Vuoi memorizzare le credenziali?", [
     {
       text: "Esci",
@@ -139,8 +130,9 @@ const alertSaveCred = (email) =>
       text: "OK",
       onPress: () => {
         console.log("OK Pressed");
-        //Saving the cred locally
-        save("email", email);
+        //Saving the cred onto the local storage
+        save("email", credLogin.email);
+        save("pwd", credLogin.password);
       },
     },
   ]);

@@ -19,9 +19,11 @@ import { queryWorkout, readWorkouts } from "../firebase.js";
 
 //let trainings = require('../allenamenti.json');
 export default function MyTrainings({ navigation }) {
-  //email passed from the login form
-  const { email } = useContext(appContext);
-  //
+//Ref from the context
+  const glbEmail = useContext(appContext);
+//Getting the current email logged in
+  const email = glbEmail.current
+  //console.log(email);
   const [workouts, setWorkouts] = useState([]);
 
   //useEffect performed only on mounts of the component
@@ -38,7 +40,7 @@ export default function MyTrainings({ navigation }) {
       <ScrollView>
         {workouts === [] ? (
           <Text>Loading...</Text>
-        ) : (
+        ) : (          
           <Workouts workouts={workouts} navigation={navigation} />
         )}
       </ScrollView>

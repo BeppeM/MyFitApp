@@ -25,7 +25,7 @@ export const custom = StyleSheet.create({
   text: {
     fontSize: 20,
     margin: 8,
-    color: "white",
+    color: 'white',
   },
   //Button style for the inner container
   containerStyle: {

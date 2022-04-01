@@ -12,10 +12,10 @@ import { custom, buttonStyle } from "../styles.js";
 export default function Card({ custom, ...props }) {
   return (
     <View style={custom.cardContainer} key={props.uuid}>
-      <Text style={{ style: custom.text, alignSelf: "center" }}>
+      <Text style={{  ...custom.text, alignSelf: "center" }}>
         {props.title}
       </Text>
-      <Text style={{ style: custom.text, alignSelf: "center" }}>
+      <Text style={{ ...custom.text, alignSelf: "center" }}>
         {props.goal}
       </Text>
       <HandleWorkout />
