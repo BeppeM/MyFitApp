@@ -29,20 +29,12 @@ function Pippo() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="MyTrainings"
-          component={MyTrainings}          
-        />
+        <Stack.Screen name="Login" component={Login} />
+
+        <Stack.Screen name="MyTrainings" component={MyTrainings} />
         <Stack.Screen name="WorkoutDetails" component={WorkoutDetails} />
         <Stack.Screen name="AddWorkout" component={AddWorkout} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-/**
- * <Stack.Screen 
-            name="Login" 
-            component={Login}
-          />
- */

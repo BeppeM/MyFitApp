@@ -57,19 +57,19 @@ export default function MyTrainings({ navigation }) {
   );
 }
 
-//Components to show workouts' cards
-function Workouts({ workouts, navigation }) {
-  return workouts.map((workout) => (
-    <TouchableOpacity      
-      onPress={() => {
+/**
+ * onPress={() => {
         navigation.navigate("WorkoutDetails", {
           workout: workout,
         });
       }}
-      underlayColor="white"
-    >
-      <Card custom={custom} uuid={workout.id} title={workout.title} goal={workout.goal} />
-    </TouchableOpacity>
+ * 
+ */
+
+//Components to show workouts' cards
+function Workouts({ workouts, navigation }) {
+  return workouts.map((workout, i) => (    
+      <Card custom={custom} key={i} title={workout.title} goal={workout.goal} />
   ));
 }
 
