@@ -10,6 +10,7 @@ import {
     ScrollView,
   } from "react-native";
 import { custom } from "./custom";
+
 /**
  * sr=0 -> NumeriInput for set
  * sr=1 -> NumeriInput for rep
@@ -19,6 +20,9 @@ export default function SetRep({exercise, sr, ...props}){
         <View style={styles.rowFlex}>
           <Text style={custom.text}>{props.titolo}:</Text>
           <NumericInput
+            textColor= 'white'
+            rightButtonBackgroundColor='#0d47a1'
+            leftButtonBackgroundColor='#0d47a1'
             minValue={0}
             containerStyle={styles.numInput}
             rounded

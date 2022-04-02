@@ -1,12 +1,20 @@
 //Form used to insert a new Exercise
 //It is used inside component DayWorkout
 import { useState, useContext } from "react";
-import { StyleSheet, Text, TextInput, View, Alert } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Alert,
+  Pressable,
+} from "react-native";
 import Form from "./Form";
-import { Button } from "react-native-elements";
-import { custom } from "./custom";
+import { Button } from "react-native";
+import { custom } from "../styles.js";
 import SetRep from "./SetRep";
 import { WorkoutContext } from "../screens/AddWorkout";
+import { TouchableHighlight, TouchableOpacity } from "react-native-web";
 
 export function AddExercise({ day, dailyExercises, ...props }) {
   //state for the excercise form
@@ -39,15 +47,17 @@ export function AddExercise({ day, dailyExercises, ...props }) {
   return (
     <View style={styles.exerciseView}>
       <View style={styles.saveButton}>
-        <Button
-          title="Salva"
+        <Pressable
+          style={{ ...custom.buttonStyle, width: "25%" }}
           onPress={() => {
             checkForm()
               ? //Gestire questa parte
                 update()
               : alertExercise();
           }}
-        />
+        >
+          <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>Salva</Text>
+        </Pressable>
       </View>
       <ExcerciseView
         idx={props.idx}

@@ -11,7 +11,7 @@ import {
 import { useState, useContext, useEffect } from "react";
 import { appContext } from "../App.js";
 import { custom } from "../styles.js";
-import Card from "../Components/Card.js";
+import {PureCardWorkout} from "../Components/Card.js";
 import uuid from "react-native-uuid";
 import { FAB } from "react-native-paper";
 import { queryWorkout, readWorkouts } from "../firebase.js";
@@ -27,6 +27,7 @@ export default function MyTrainings({ navigation }) {
   const [workouts, setWorkouts] = useState([]);
 
   //useEffect performed only on mounts of the component
+  //Read all the workouts of the user logged in
   useEffect(async () => {
     //Getting data from firestore
     console.log("Fetching workouts of: " + email + " from firestore");
@@ -71,7 +72,7 @@ export default function MyTrainings({ navigation }) {
 //Components to show workouts' cards
 function Workouts({ workouts, navigation }) {
   return workouts.map((workout, i) => (    
-      <Card custom={custom} key={i} title={workout.title} goal={workout.goal} />
+      <PureCardWorkout custom={custom} key={i} title={workout.title} goal={workout.goal} />
   ));
 }
 

@@ -1,4 +1,5 @@
-//Card used to show the days added from the user
+//Card used to show the days added from the user into the form
+//Component used into the screen AddWorkout
 import { View, Text } from "react-native";
 import { memo } from "react";
 import { PureCardExercise } from "./CardExercise";

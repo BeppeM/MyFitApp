@@ -1,3 +1,4 @@
+import { memo } from "react";
 import {
   View,
   Text,
@@ -9,7 +10,7 @@ import {
 import { custom, buttonStyle } from "../styles.js";
 
 //Card for showing all user workouts stored on firestore
-export default function Card({ custom, ...props }) {
+function Card({ custom, ...props }) {
   return (
     <View style={custom.cardContainer} key={props.uuid}>
       <Text style={{  ...custom.text, alignSelf: "center" }}>
@@ -52,6 +53,8 @@ function HandleWorkout() {
     </>
   );
 }
+
+export const PureCardWorkout = memo(Card);
 
 //Button style for the inner container
 const containerStyle = {

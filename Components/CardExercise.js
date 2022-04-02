@@ -1,4 +1,4 @@
-//Card used to show the exercises added from the user
+//Card used to show the exercises added from the user into the form
 //into the screen AddWorkout
 
 import { memo } from "react";

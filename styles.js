@@ -55,6 +55,16 @@ export const custom = StyleSheet.create({
     backgroundColor: "#5e92f3",
     ...stdStyle.commonStyle,
   },
+  //Style for textInputs
+  textInput:{
+    borderColor: 'white',
+    borderWidth: 1,
+    alignSelf: 'flex-start',
+    width: "100%",
+    padding: 5,
+    borderRadius: 5,
+    color: 'white',
+},
 });
 
 //Button style

@@ -25,9 +25,9 @@ let emailJSON;
 export default function AddWorkout({ navigation, route }) {
   //Memorizzo il nome dell'allenamento
   const [workoutName, setWorkoutName] = useState("");
-  const { email } = useContext(appContext);
+  const glbEmail = useContext(appContext);
   //Setting email to save into json and store on firestore
-  emailJSON = email;
+  emailJSON = glbEmail.current;
   //Main JSON object to store the workout days
   workoutDays = useRef([]);
   //Number of days to workout
@@ -35,14 +35,13 @@ export default function AddWorkout({ navigation, route }) {
 
   return (
     <View style={custom.background}>
-      {console.log(email)}
+      {console.log(glbEmail.current)}
       {console.log("Giorno dei workout: ")}
       {console.log(workoutDays.current)}
       <ScrollView>
         <View style={custom.background}>
           <Form desc="titolo workout" onNewValue={setWorkoutName} />
-          {
-            //console.log("O shit!!"),
+          {          
             workoutDays.current.map((work, i) => {
               return <PureDayCard key={i} workDay={work} />;
             })
@@ -52,9 +51,7 @@ export default function AddWorkout({ navigation, route }) {
             style={custom.buttonStyle}
             onPress={() => {
               //Retrieve exercises of the Day just added
-              let data = getExercises(numDays + 1);
-              //              console.log("Dati: ")
-              //              console.log(data)
+              let data = getExercises(numDays + 1);              
               data !== null && data !== undefined
                 ? //Pushing data
                   (workoutDays.current.push(data),
