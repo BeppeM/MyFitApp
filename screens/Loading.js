@@ -3,6 +3,7 @@ import { custom } from "../styles";
 import * as SecureStore from "expo-secure-store";
 import { useContext, useEffect, useRef } from "react";
 import { appContext } from "../App.js";
+
 export default function Loading({ navigation }) {
   const glbEmail = useContext(appContext);
   //Get email and password from the local storage to login

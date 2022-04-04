@@ -6,7 +6,7 @@ import { Button } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 //style
 import { custom, buttonStyle, containerStyle } from "../styles.js";
-//firebise authentication
+//firebase authentication
 import { auth } from "../firebase.js";
 import { handleLogin, handleReg } from "../firebase.js";
 
@@ -21,17 +21,6 @@ export default function Login({ navigation }) {
   //error in login
   const [logErr, setLogErr] = useState("");
 
-/*  //Try to get credentials every time the component is mounted
-// TO DELETEEEEE
-  useEffect(() => {
-    getValueFor("email").then((resEmail) => {
-      console.log(resEmail);
-    });
-    return () => {
-      console.log("unmounted");
-    };
-  }, []);
-*/
   //RETURN COMPONENT
   return (
     <View style={custom.background}>

@@ -6,12 +6,14 @@ import { PureCardExercise } from "./CardExercise";
 import { custom } from '../styles.js';
 //into the screen AddWorkout
 function DayCard({ workDay }) {
-  //  console.log("Entra")
+  console.log("Entra")
   let key = getKey(workDay);
   return (
     <View style={custom.cardContainer}>
       <Text style={{...custom.text, alignSelf:'center'}}>{key}</Text>
       {workDay[key].map((exercise, i) => {
+        console.log("Bella broooo!! ")
+        console.log(workDay)
         return <PureCardExercise key={i} exercise={exercise} />;
       })}
     </View>

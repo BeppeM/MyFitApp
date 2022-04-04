@@ -32,6 +32,7 @@ export default function MyTrainings({ navigation }) {
     //Getting data from firestore
     console.log("Fetching workouts of: " + email + " from firestore");
     reading(email, setWorkouts);
+    console.log(workouts)
   }, []);
 
   //MyTraining component
@@ -42,6 +43,7 @@ export default function MyTrainings({ navigation }) {
         {workouts === [] ? (
           <Text>Loading...</Text>
         ) : (          
+          //Mostro tutti i workout dell'utente
           <Workouts workouts={workouts} navigation={navigation} />
         )}
       </ScrollView>
@@ -60,19 +62,17 @@ export default function MyTrainings({ navigation }) {
   );
 }
 
-/**
- * onPress={() => {
-        navigation.navigate("WorkoutDetails", {
-          workout: workout,
-        });
-      }}
- * 
- */
-
 //Components to show workouts' cards
 function Workouts({ workouts, navigation }) {
   return workouts.map((workout, i) => (    
-      <PureCardWorkout custom={custom} key={i} title={workout.title} goal={workout.goal} />
+      <PureCardWorkout custom={custom} key={i} id={i} title={workout.title} goal={workout.goal} navigation={(k) =>{
+        console.log("Stampa in corso: ")
+        console.log(workouts[k])
+        //Cambio screen e passo il workout in questione
+        navigation.navigate("WorkoutDetails", {
+          workout: workouts[k]
+          });
+      }} />
   ));
 }
 

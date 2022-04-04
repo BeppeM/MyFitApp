@@ -5,35 +5,37 @@ import {
   TextInput,
   StyleSheet,
   Button,
+  TouchableOpacity,
   Pressable,
 } from "react-native";
 import { custom, buttonStyle } from "../styles.js";
 
 //Card for showing all user workouts stored on firestore
-function Card({ custom, ...props }) {
+function Card({ custom, navigation, id, ...props }) {
   return (
-    <View style={custom.cardContainer} key={props.uuid}>
-      <Text style={{  ...custom.text, alignSelf: "center" }}>
-        {props.title}
-      </Text>
-      <Text style={{ ...custom.text, alignSelf: "center" }}>
-        {props.goal}
-      </Text>
-      <HandleWorkout />
+    <View style={custom.cardContainer} key={props.uuid}>    
+      <TouchableOpacity
+      onPress={() =>{
+        navigation(id)
+      }}
+      >
+      <Text style={{ ...custom.text, alignSelf: "center" }}>{props.title}</Text>
+      <Text style={{ ...custom.text, alignSelf: "center" }}>{props.goal}</Text>
+      <HandleWorkout navigation={navigation}/>    
+      </TouchableOpacity>
     </View>
   );
 }
 
-//Two buttons 
+//Two buttons
 //Delete workout
-//Edit workout
-function HandleWorkout() {
+//Edit workout da fare
+function HandleWorkout({navigation}) {
   return (
     <>
       <Pressable
         style={custom.buttonStyle}
-        onPress={() => {
-          console.log("Add method");
+        onPress={() => {                  
         }}
       >
         <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
