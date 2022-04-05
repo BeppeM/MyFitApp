@@ -1,13 +1,12 @@
-import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import Form from "../Components/Form";
 import { appContext } from "../App.js";
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext } from "react";
 import { Button } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 //style
 import { custom, buttonStyle, containerStyle } from "../styles.js";
 //firebase authentication
-import { auth } from "../firebase.js";
 import { handleLogin, handleReg } from "../firebase.js";
 
 export default function Login({ navigation }) {

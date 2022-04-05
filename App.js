@@ -1,32 +1,32 @@
-import { StatusBar } from "expo-status-bar";
 import React, { useRef } from "react";
 //Allows navigation
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StyleSheet, Text, View } from "react-native";
 import Login from "./screens/Login.js";
 import MyTrainings from "./screens/MyTrainings.js";
 import WorkoutDetails from "./screens/WorkoutDetails.js";
-import { createContext, useState } from "react";
+import { createContext } from "react";
 import AddWorkout from "./screens/AddWorkout.js";
 import { custom } from "./styles.js";
 import Loading from "./screens/Loading.js";
+import { LogBox } from 'react-native';
+//Ignore all warnings
+LogBox.ignoreAllLogs();
+
 //Navigation into the app
 const Stack = createNativeStackNavigator();
 //Creating the context
 export const appContext = createContext();
-
 export default function App() {
-  //const [email, setEmail] = useState("");
   const glbEmail = useRef("");
   return (
     <appContext.Provider value={ glbEmail }>
-      <Pippo styles={custom.container} />
+      <Initialize styles={custom.container} />
     </appContext.Provider>
   );
 }
 
-function Pippo() {
+function Initialize() {
   return (
     <NavigationContainer>
       <Stack.Navigator>      
