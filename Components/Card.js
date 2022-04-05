@@ -8,10 +8,11 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
+import { deleteWorkout } from "../firebase.js";
 import { custom, buttonStyle } from "../styles.js";
 
 //Card for showing all user workouts stored on firestore
-function Card({ custom, navigation, id, ...props }) {
+function Card({ custom, navigation, id, resetAll, ...props }) {
   return (
     <View style={custom.cardContainer} key={props.uuid}>    
       <TouchableOpacity
@@ -21,7 +22,7 @@ function Card({ custom, navigation, id, ...props }) {
       >
       <Text style={{ ...custom.text, alignSelf: "center" }}>{props.title}</Text>
       <Text style={{ ...custom.text, alignSelf: "center" }}>{props.goal}</Text>
-      <HandleWorkout navigation={navigation}/>    
+      <HandleWorkout navigation={navigation} id={props.title} reset={resetAll}/>    
       </TouchableOpacity>
     </View>
   );
@@ -30,12 +31,18 @@ function Card({ custom, navigation, id, ...props }) {
 //Two buttons
 //Delete workout
 //Edit workout da fare
-function HandleWorkout({navigation}) {
+function HandleWorkout({navigation, id, reset}) {
   return (
     <>
       <Pressable
         style={custom.buttonStyle}
-        onPress={() => {                  
+        onPress={() => {  
+          deleteWorkout(id).then(() =>{
+            console.log("Workout " + id + " deleted")
+            reset()
+          }).catch((err) =>{
+            console.log(err);
+          })      
         }}
       >
         <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>

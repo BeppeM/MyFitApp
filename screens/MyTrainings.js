@@ -11,7 +11,7 @@ import {
 import { useState, useContext, useEffect } from "react";
 import { appContext } from "../App.js";
 import { custom } from "../styles.js";
-import {PureCardWorkout} from "../Components/Card.js";
+import { PureCardWorkout } from "../Components/Card.js";
 import uuid from "react-native-uuid";
 import { FAB } from "react-native-paper";
 import { queryWorkout, readWorkouts } from "../firebase.js";
@@ -19,10 +19,10 @@ import { queryWorkout, readWorkouts } from "../firebase.js";
 
 //let trainings = require('../allenamenti.json');
 export default function MyTrainings({ navigation }) {
-//Ref from the context
+  //Ref from the context
   const glbEmail = useContext(appContext);
-//Getting the current email logged in
-  const email = glbEmail.current
+  //Getting the current email logged in
+  const email = glbEmail.current;
   //console.log(email);
   const [workouts, setWorkouts] = useState([]);
 
@@ -32,7 +32,7 @@ export default function MyTrainings({ navigation }) {
     //Getting data from firestore
     console.log("Fetching workouts of: " + email + " from firestore");
     reading(email, setWorkouts);
-    console.log(workouts)
+    console.log(workouts);
   }, []);
 
   //MyTraining component
@@ -42,9 +42,13 @@ export default function MyTrainings({ navigation }) {
       <ScrollView>
         {workouts === [] ? (
           <Text>Loading...</Text>
-        ) : (          
+        ) : (
           //Mostro tutti i workout dell'utente
-          <Workouts workouts={workouts} navigation={navigation} />
+          <Workouts
+            workouts={workouts}
+            navigation={navigation}
+            resetAll={() => reading(email, setWorkouts)}
+          />
         )}
       </ScrollView>
       <FAB
@@ -54,7 +58,7 @@ export default function MyTrainings({ navigation }) {
         onPress={() => {
           console.log("Adding new workout");
           navigation.navigate("AddWorkout", {
-            reading:() => reading(email, setWorkouts)            
+            reading: () => reading(email, setWorkouts),
           });
         }}
       />
@@ -63,16 +67,24 @@ export default function MyTrainings({ navigation }) {
 }
 
 //Components to show workouts' cards
-function Workouts({ workouts, navigation }) {
-  return workouts.map((workout, i) => (    
-      <PureCardWorkout custom={custom} key={i} id={i} title={workout.title} goal={workout.goal} navigation={(k) =>{
-        console.log("Stampa in corso: ")
-        console.log(workouts[k])
+function Workouts({ workouts, navigation, resetAll }) {
+  return workouts.map((workout, i) => (
+    <PureCardWorkout
+      custom={custom}
+      key={i}
+      id={i}
+      title={workout.title}
+      goal={workout.goal}
+      resetAll={resetAll}
+      navigation={(k) => {
+        console.log("Stampa in corso: ");
+        console.log(workouts[k]);
         //Cambio screen e passo il workout in questione
         navigation.navigate("WorkoutDetails", {
-          workout: workouts[k]
-          });
-      }} />
+          workout: workouts[k],
+        });
+      }}
+    />
   ));
 }
 

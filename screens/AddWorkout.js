@@ -7,15 +7,16 @@ import {
   ScrollView,
   Alert,
   Pressable,
+  Button
 } from "react-native";
 import { custom, buttonStyle, containerStyle } from "../styles.js";
 import Form from "../Components/Form";
-import { Button } from "react-native";
 import { useEffect, useRef, useState, useContext } from "react";
 import { AddDayWorkout, getExercises } from "../Components/AddDayWorkout.js";
-import Card from "../Components/Card.js";
 import { PureDayCard } from "../Components/DayCard.js";
+//context to get email from the main screen
 import { appContext } from "../App.js";
+//write on firestore
 import { writeUserWorkout } from "../firebase.js";
 
 //JSON object che contiene tutti gli esercizi dei giorni aggiunti!
@@ -38,7 +39,7 @@ export default function AddWorkout({ navigation, route }) {
       {console.log(glbEmail.current)}
       {console.log("Giorno dei workout: ")}
       {console.log(workoutDays.current)}
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <View style={custom.background}>
           <Form desc="titolo workout" onNewValue={setWorkoutName} />
           {          

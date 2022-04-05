@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } f
 import { 
   getFirestore, where, 
   collection, getDocs, 
-  addDoc, query, setDoc, doc } from "firebase/firestore";
+  addDoc, query, setDoc, doc, deleteDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -52,4 +52,9 @@ export const writeUserWorkout= async (workout) =>{
     title: workout.title,
     allenamento: workout.allenamento
   });
+}
+
+//Delete workout of the user
+export const deleteWorkout = async (id) =>{
+  await deleteDoc(doc(db, "workouts", id))
 }

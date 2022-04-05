@@ -23,7 +23,7 @@ export default function WorkoutDetails({ navigation, route }) {
         <Text style={{ alignSelf: "center", ...custom.text }}>
           {workout.title}
         </Text>
-        <Text style={custom.text}>{workout.owner}</Text>
+        <Text style={custom.text}>Creatore: {workout.owner}</Text>
         {workout.allenamento.map((obj, i) => {
           return <PureDayCard style={custom.text} key={i} workDay={obj} />;
         })}

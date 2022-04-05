@@ -7,7 +7,6 @@ import { StyleSheet, Text, View } from "react-native";
 import Login from "./screens/Login.js";
 import MyTrainings from "./screens/MyTrainings.js";
 import WorkoutDetails from "./screens/WorkoutDetails.js";
-import auth from "./firebase.js";
 import { createContext, useState } from "react";
 import AddWorkout from "./screens/AddWorkout.js";
 import { custom } from "./styles.js";

@@ -1,7 +1,7 @@
 import { View, ActivityIndicator, Text } from "react-native";
 import { custom } from "../styles";
 import * as SecureStore from "expo-secure-store";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import { appContext } from "../App.js";
 
 export default function Loading({ navigation }) {
