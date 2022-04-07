@@ -9,7 +9,8 @@ import { createContext } from "react";
 import AddWorkout from "./screens/AddWorkout.js";
 import { custom } from "./styles.js";
 import Loading from "./screens/Loading.js";
-import { LogBox } from 'react-native';
+import { Button, LogBox } from "react-native";
+import EditWorkoutDay from "./screens/EditWorkoutDay.js";
 //Ignore all warnings
 LogBox.ignoreAllLogs();
 
@@ -20,7 +21,7 @@ export const appContext = createContext();
 export default function App() {
   const glbEmail = useRef("");
   return (
-    <appContext.Provider value={ glbEmail }>
+    <appContext.Provider value={glbEmail}>
       <Initialize styles={custom.container} />
     </appContext.Provider>
   );
@@ -29,12 +30,13 @@ export default function App() {
 function Initialize() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>      
-      <Stack.Screen name="Loading" component={Loading} />
+      <Stack.Navigator>
+        <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="MyTrainings" component={MyTrainings} />
         <Stack.Screen name="WorkoutDetails" component={WorkoutDetails} />
         <Stack.Screen name="AddWorkout" component={AddWorkout} />
+        <Stack.Screen name="EditWorkoutDay" component={EditWorkoutDay} />
       </Stack.Navigator>
     </NavigationContainer>
   );

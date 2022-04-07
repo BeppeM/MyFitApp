@@ -27,14 +27,21 @@ export function AddDayWorkout(props) {
 
   return (
     <View style={custom.cardContainer}>
-      <View style={{borderBottomColor: 'white',borderBottomWidth: 1, margin: 4}}>
+      <View
+        style={{ borderBottomColor: "white", borderBottomWidth: 1, margin: 4 }}
+      >
         <Text style={custom.text}>Giorno {props.day}:</Text>
       </View>
       {dailyExercises.current !== [] ? (
-        //Aggiustare il design di CardExercise
         //Show all the exercises of the current day added
         dailyExercises.current.map((exercise, i) => (
-          <PureCardExercise key={i} exercise={exercise} />
+          <PureCardExercise
+            key={i}
+            exercise={exercise}
+            isEditable={false}
+            workoutToEdit={{}}
+            navigation={{}}        
+          />
         ))
       ) : (
         <></>

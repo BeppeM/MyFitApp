@@ -47,6 +47,7 @@ export default function MyTrainings({ navigation }) {
           <Workouts
             workouts={workouts}
             navigation={navigation}
+            //used to read again te workouts from firestore
             resetAll={() => reading(email, setWorkouts)}
           />
         )}
@@ -82,6 +83,7 @@ function Workouts({ workouts, navigation, resetAll }) {
         //Cambio screen e passo il workout in questione
         navigation.navigate("WorkoutDetails", {
           workout: workouts[k],
+          resetAll: resetAll
         });
       }}
     />

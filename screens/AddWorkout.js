@@ -107,8 +107,10 @@ const addWorkout = async (workoutName, navigation, route) => {
   console.log(JSON.parse(s));
   writeUserWorkout(JSON.parse(s)).then((message) => {
     console.log("Fatto bitch!");
-    route.params.reading();
-    navigation.goBack();
+    route.params.reading().then(() =>{
+      navigation.goBack();
+    });
+
   });
 };
 

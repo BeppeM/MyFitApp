@@ -13,6 +13,7 @@ import { custom, buttonStyle } from "../styles.js";
 
 //Card for showing all user workouts stored on firestore
 function Card({ custom, navigation, id, resetAll, ...props }) {
+  console.log(id)
   return (
     <View style={custom.cardContainer} key={props.uuid}>    
       <TouchableOpacity
@@ -30,7 +31,6 @@ function Card({ custom, navigation, id, resetAll, ...props }) {
 
 //Two buttons
 //Delete workout
-//Edit workout da fare
 function HandleWorkout({navigation, id, reset}) {
   return (
     <>
@@ -48,17 +48,7 @@ function HandleWorkout({navigation, id, reset}) {
         <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
           Elimina
         </Text>
-      </Pressable>
-      <Pressable
-        style={custom.buttonStyle}
-        onPress={() => {
-          console.log("Add method");
-        }}
-      >
-        <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
-          Modifica
-        </Text>
-      </Pressable>
+      </Pressable>      
     </>
   );
 }
