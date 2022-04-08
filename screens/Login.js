@@ -68,8 +68,10 @@ export default function Login({ navigation }) {
         onPress={() => {
           handleReg(credLogin.email, credLogin.password)
             .then((userCredential) => {
+              //setting the global email
+              glbEmail.current = credLogin.email;
               // Signed up
-              const user = userCredential.user;
+              //const user = userCredential.user;
               navigation.replace("MyTrainings");
             })
             .catch((error) => {

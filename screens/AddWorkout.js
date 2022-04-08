@@ -106,8 +106,9 @@ const addWorkout = async (workoutName, navigation, route) => {
     console.log("Fatto bitch!");
     route.params.reading().then(() =>{
       navigation.goBack();
-    });
-
+    }).catch((err) =>{
+      console.log(err)
+    })
   });
 };
 

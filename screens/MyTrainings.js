@@ -5,20 +5,15 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
-  Button,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { appContext } from "../App.js";
 import { custom } from "../styles.js";
 import { PureCardWorkout } from "../Components/Card.js";
-import uuid from "react-native-uuid";
 import { FAB } from "react-native-paper";
 import { queryWorkout, readWorkouts } from "../firebase.js";
-//import { doc } from 'firebase/firestore';
 
-//let trainings = require('../allenamenti.json');
 export default function MyTrainings({ navigation }) {
   //Ref from the context
   const glbEmail = useContext(appContext);

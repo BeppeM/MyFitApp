@@ -51,14 +51,14 @@ const workRef = collection(db, "workouts");
 
 //query to get the personal workouts of the user
 export const queryWorkout = (email) =>
-  query(workRef, where("owner", "==", email));
+  query(collection(db, email), where("owner", "==", email));
 
 //Read data
 export const readWorkouts = (q) => getDocs(q);
 
 //Write workout of the user into firestore
 export const writeUserWorkout = async (workout) => {
-  await setDoc(doc(db, "workouts", workout.title), {
+  await setDoc(doc(db, workout.owner, workout.title), {
     owner: workout.owner,
     title: workout.title,
     allenamento: workout.allenamento,
@@ -66,6 +66,6 @@ export const writeUserWorkout = async (workout) => {
 };
 
 //Delete workout of the user
-export const deleteWorkout = async (id) => {
-  await deleteDoc(doc(db, "workouts", id));
+export const deleteWorkout = async (id, email) => {
+  await deleteDoc(doc(db, email, id));
 };

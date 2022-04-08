@@ -7,9 +7,11 @@ import {
 } from "react-native";
 import { deleteWorkout } from "../firebase.js";
 import { custom } from "../styles.js";
-
+import { useContext } from 'react';
+import { appContext } from "../App.js";
 //Card for showing all user workouts stored on firestore
 function Card({ custom, navigation, id, resetAll, ...props }) {
+  const glbEmail = useContext(appContext);
   console.log(id)
   return (
     <View style={custom.cardContainer} key={props.uuid}>    
@@ -20,7 +22,7 @@ function Card({ custom, navigation, id, resetAll, ...props }) {
       >
       <Text style={{ ...custom.text, alignSelf: "center" }}>{props.title}</Text>
       <Text style={{ ...custom.text, alignSelf: "center" }}>{props.goal}</Text>
-      <HandleWorkout navigation={navigation} id={props.title} reset={resetAll}/>    
+      <HandleWorkout navigation={navigation} id={props.title} reset={resetAll} glbEmail={glbEmail}/>    
       </TouchableOpacity>
     </View>
   );
@@ -28,13 +30,13 @@ function Card({ custom, navigation, id, resetAll, ...props }) {
 
 //Two buttons
 //Delete workout
-function HandleWorkout({navigation, id, reset}) {
+function HandleWorkout({navigation, id, reset, glbEmail}) {
   return (
     <>
       <Pressable
         style={custom.buttonStyle}
         onPress={() => {  
-          deleteWorkout(id).then(() =>{
+          deleteWorkout(id, glbEmail.current).then(() =>{
             console.log("Workout " + id + " deleted")
             reset()
           }).catch((err) =>{
