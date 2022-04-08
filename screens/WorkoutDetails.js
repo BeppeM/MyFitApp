@@ -1,15 +1,12 @@
 /**
  * Screen used to show workout details
  */
-import {
-  StyleSheet,
+import {  
   Text,
-  View,
-  TouchableOpacity,
+  View,  
   ScrollView,
 } from "react-native";
 import { custom } from "../styles";
-import CardExercise from "../Components/CardExercise";
 import { PureDayCard } from "../Components/DayCard";
 
 export default function WorkoutDetails({ navigation, route }) {
@@ -19,7 +16,7 @@ export default function WorkoutDetails({ navigation, route }) {
   console.log(workout);
   return (
     <View style={custom.background}>
-      <ScrollView>
+      <ScrollView keyboardShouldPersistTaps="always">
         <Text style={{ alignSelf: "center", ...custom.text }}>
           {workout.title}
         </Text>

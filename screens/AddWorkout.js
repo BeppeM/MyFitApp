@@ -1,17 +1,14 @@
 //Screen used to add a new Workout of the user
 import {
-  StyleSheet,
   Text,
   View,
-  TouchableOpacity,
   ScrollView,
   Alert,
   Pressable,
-  Button
 } from "react-native";
-import { custom, buttonStyle, containerStyle } from "../styles.js";
+import { custom } from "../styles.js";
 import Form from "../Components/Form";
-import { useEffect, useRef, useState, useContext } from "react";
+import { useRef, useState, useContext } from "react";
 import { AddDayWorkout, getExercises } from "../Components/AddDayWorkout.js";
 import { PureDayCard } from "../Components/DayCard.js";
 //context to get email from the main screen

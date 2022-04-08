@@ -2,14 +2,11 @@ import { memo } from "react";
 import {
   View,
   Text,
-  TextInput,
-  StyleSheet,
-  Button,
   TouchableOpacity,
   Pressable,
 } from "react-native";
 import { deleteWorkout } from "../firebase.js";
-import { custom, buttonStyle } from "../styles.js";
+import { custom } from "../styles.js";
 
 //Card for showing all user workouts stored on firestore
 function Card({ custom, navigation, id, resetAll, ...props }) {

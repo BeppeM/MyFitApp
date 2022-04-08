@@ -2,10 +2,9 @@ import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import Form from "../Components/Form";
 import { appContext } from "../App.js";
 import { useState, useContext } from "react";
-import { Button } from "react-native-elements";
 import * as SecureStore from "expo-secure-store";
 //style
-import { custom, buttonStyle, containerStyle } from "../styles.js";
+import { custom } from "../styles.js";
 //firebase authentication
 import { handleLogin, handleReg } from "../firebase.js";
 

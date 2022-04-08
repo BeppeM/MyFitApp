@@ -9,12 +9,8 @@ import {
   Alert,
   Pressable,
 } from "react-native";
-import Form from "./Form";
-import { Button } from "react-native";
 import { custom } from "../styles.js";
 import SetRep from "./SetRep";
-import { WorkoutContext } from "../screens/AddWorkout";
-import { TouchableHighlight, TouchableOpacity } from "react-native-web";
 
 export function AddExercise({ day, dailyExercises, ...props }) {
   //state for the excercise form

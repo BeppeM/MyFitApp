@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
+import { Text, View, ScrollView, Pressable } from "react-native";
 import { AddDayWorkout, getExercises } from "../Components/AddDayWorkout";
 import { custom } from "../styles";
 import { writeUserWorkout } from "../firebase";

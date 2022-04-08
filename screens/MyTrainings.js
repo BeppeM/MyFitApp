@@ -38,9 +38,8 @@ export default function MyTrainings({ navigation }) {
 
   //MyTraining component
   return (
-    <View style={custom.background}>
-      <Text style={custom.text}>Ci siamo {email}</Text>
-      <ScrollView>
+    <View style={custom.background}>      
+      <ScrollView style={{marginTop: 10}} keyboardShouldPersistTaps="always">
         {workouts === [] ? (
           <Text>Loading...</Text>
         ) : (

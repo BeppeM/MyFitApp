@@ -3,11 +3,8 @@
 import NumericInput from "react-native-numeric-input";
 import {
     StyleSheet,
-    Text,
-    TextInput,
-    View,
-    TouchableOpacity,
-    ScrollView,
+    Text,    
+    View,    
   } from "react-native";
 import { custom } from "./custom";
 

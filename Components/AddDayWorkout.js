@@ -1,7 +1,7 @@
 //Componente per poter aggiungere un giorno al workout all'allenamento
 //Include il componente Esercizio
-import { useState, useRef, useEffect } from "react";
-import { StyleSheet, Text, View, ScrollView, Pressable } from "react-native";
+import { useState, useRef } from "react";
+import { Text, View, Pressable } from "react-native";
 import { custom } from "../styles.js";
 import { AddExercise } from "./AddExercise";
 import { PureCardExercise } from "./CardExercise";
