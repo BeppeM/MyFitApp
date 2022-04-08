@@ -24,7 +24,8 @@ export default function WorkoutDetails({ navigation, route }) {
           {workout.title}
         </Text>
         <Text style={custom.text}>Creatore: {workout.owner}</Text>
-        {workout.allenamento.map((obj, i) => {
+        {//mostro gli esercizi raggruppati per giorno          
+          workout.allenamento.map((obj, i) => {
           return <PureDayCard style={custom.text} key={i} workDay={obj} isEditable workoutToEdit={workout} navigation={navigation} resetAll={route.params.resetAll}/>;
         })}
       </ScrollView>

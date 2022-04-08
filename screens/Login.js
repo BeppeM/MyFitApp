@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Pressable } from "react-native";
 import Form from "../Components/Form";
 import { appContext } from "../App.js";
 import { useState, useContext } from "react";
@@ -15,7 +15,7 @@ export default function Login({ navigation }) {
 
   const [credLogin, setCredLog] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   //error in login
   const [logErr, setLogErr] = useState("");
@@ -23,37 +23,34 @@ export default function Login({ navigation }) {
   //RETURN COMPONENT
   return (
     <View style={custom.background}>
-    {console.log(credLogin.email + " " + credLogin.password)}
+      {console.log(credLogin.email + " " + credLogin.password)}
       <Form
         desc="email"
         val={credLogin.email}
         onNewValue={(v) => {
-          setCredLog({ email: v, password: credLogin.password})
+          setCredLog({ email: v, password: credLogin.password });
         }}
       />
       <Form
         desc="password"
         val={credLogin.password}
         onNewValue={(v) => {
-          setCredLog({ password: v, email: credLogin.email})
+          setCredLog({ password: v, email: credLogin.email });
         }}
       />
       <View>
         <Text style={custom.text}>{logErr}</Text>
       </View>
-      <Button
-        //Button used for login
-        title="Login"
-        titleStyle={{ fontWeight: "bold" }}
-        {...containerStyle}
-        {...buttonStyle}
+      <Pressable
+        style={{ ...custom.buttonStyle }}
         onPress={() => {
           handleLogin(credLogin.email, credLogin.password)
-            .then((userCredential) => {// Signed in 
-              //setting the global email  
-              glbEmail.current = credLogin.email
-              //saving credentials locally                         
-              alertSaveCred(credLogin);              
+            .then((userCredential) => {
+              // Signed in
+              //setting the global email
+              glbEmail.current = credLogin.email;
+              //saving credentials locally
+              alertSaveCred(credLogin);
               navigation.replace("MyTrainings");
             })
             .catch((error) => {
@@ -63,13 +60,12 @@ export default function Login({ navigation }) {
               );
             });
         }}
-      />
-      <Button
-        //Button used for registration
-        title="Registrati"
-        titleStyle={{ fontWeight: "bold" }}
-        {...containerStyle}
-        {...buttonStyle}
+      >
+        <Text style={{ ...custom.text, alignSelf: "center" }}>Login</Text>
+      </Pressable>
+      
+      <Pressable
+        style={{ ...custom.buttonStyle }}
         onPress={() => {
           handleReg(credLogin.email, credLogin.password)
             .then((userCredential) => {
@@ -81,9 +77,11 @@ export default function Login({ navigation }) {
               setLogErr(error.message);
             });
         }}
-      />    
+      >
+        <Text style={{ ...custom.text, alignSelf: "center" }}>Registrati</Text>
+      </Pressable>
     </View>
-  ) 
+  );
 }
 
 //style for the login view

@@ -7,6 +7,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  Button,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { appContext } from "../App.js";
@@ -83,7 +84,7 @@ function Workouts({ workouts, navigation, resetAll }) {
         //Cambio screen e passo il workout in questione
         navigation.navigate("WorkoutDetails", {
           workout: workouts[k],
-          resetAll: resetAll
+          resetAll: resetAll,
         });
       }}
     />

@@ -5,14 +5,14 @@ import { StyleSheet } from "react-native";
 
 //My common style
 const stdStyle = StyleSheet.create({
-    commonStyle: {
-      borderColor: "white",
-      borderRadius: 5,
-      borderWidth: 1,
-      marginBottom: 10,
-      margin: 8,
-    },
-  });
+  commonStyle: {
+    borderColor: "white",
+    borderRadius: 5,
+    borderWidth: 1,
+    marginBottom: 10,
+    margin: 8,
+  },
+});
 
 export const custom = StyleSheet.create({
   //Background style
@@ -25,7 +25,7 @@ export const custom = StyleSheet.create({
   text: {
     fontSize: 20,
     margin: 8,
-    color: 'white',
+    color: "white",
   },
   //Button style for the inner container
   containerStyle: {
@@ -33,7 +33,7 @@ export const custom = StyleSheet.create({
     width: "50%",
   },
   //Cards Workout into MyTrainings screen
-  cardContainer: {    
+  cardContainer: {
     flex: 1,
     backgroundColor: "#1565c0",
     padding: 5,
@@ -46,25 +46,25 @@ export const custom = StyleSheet.create({
     borderRadius: 30,
     margin: 8,
     elevation: 3,
-    width: '50%',
-    justifyContent: 'center',
-    alignSelf: 'center'
+    width: "50%",
+    justifyContent: "center",
+    alignSelf: "center",
   },
-//style for the card Exercises shown in the screen AddWorkout and also Workout details
+  //style for the card Exercises shown in the screen AddWorkout and also Workout details
   cardExercise: {
     backgroundColor: "#5e92f3",
     ...stdStyle.commonStyle,
   },
   //Style for textInputs
-  textInput:{
-    borderColor: 'white',
+  textInput: {
+    borderColor: "white",
     borderWidth: 1,
-    alignSelf: 'flex-start',
+    alignSelf: "flex-start",
     width: "100%",
     padding: 5,
     borderRadius: 5,
-    color: 'white',
-},
+    color: "white",
+  },
 });
 
 //Button style
@@ -79,7 +79,9 @@ export const buttonStyle = {
 };
 
 //Button style for the inner container
-const containerStyle={containerStyle: {
-    alignSelf: 'center',
+const containerStyle = {
+  containerStyle: {
+    alignSelf: "center",
     //width: '50%',
-  }}
+  },
+};

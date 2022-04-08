@@ -1,10 +1,21 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
-import { 
-  getFirestore, where, 
-  collection, getDocs, 
-  addDoc, query, setDoc, doc, deleteDoc } from "firebase/firestore";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import {
+  getFirestore,
+  where,
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  setDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -25,36 +36,36 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 
 //method to handle login
-export const handleLogin = (email, password) => 
-    signInWithEmailAndPassword(auth, email, password)
+export const handleLogin = (email, password) =>
+  signInWithEmailAndPassword(auth, email, password);
 
 //method to handle registration
-export const handleReg = (email, password) => 
-    createUserWithEmailAndPassword(auth, email, password)
+export const handleReg = (email, password) =>
+  createUserWithEmailAndPassword(auth, email, password);
 
 //database
 export const db = getFirestore();
 
 //ref
-const workRef= collection(db, "workouts");
+const workRef = collection(db, "workouts");
 
 //query to get the personal workouts of the user
-export const queryWorkout =(email) => 
-query(workRef, where("owner", "==", email));
+export const queryWorkout = (email) =>
+  query(workRef, where("owner", "==", email));
 
 //Read data
-export const readWorkouts= (q) => getDocs(q)
+export const readWorkouts = (q) => getDocs(q);
 
 //Write workout of the user into firestore
-export const writeUserWorkout= async (workout) =>{
-  await setDoc(doc(db, "workouts", workout.title),{
+export const writeUserWorkout = async (workout) => {
+  await setDoc(doc(db, "workouts", workout.title), {
     owner: workout.owner,
     title: workout.title,
-    allenamento: workout.allenamento
+    allenamento: workout.allenamento,
   });
-}
+};
 
 //Delete workout of the user
-export const deleteWorkout = async (id) =>{
-  await deleteDoc(doc(db, "workouts", id))
-}
+export const deleteWorkout = async (id) => {
+  await deleteDoc(doc(db, "workouts", id));
+};
