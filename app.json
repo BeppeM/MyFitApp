@@ -1,13 +1,18 @@
 {
   "expo": {
-    "name": "MySchedule",
-    "slug": "MySchedule",
+    "name": "MyFitApp",
+    "slug": "MyFitApp",
+    "icon": "./assets/ic_launcher.png",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
     ],
     "android": {
-      "package": "com.Giuseppe.MyFitApp"
+      "package": "com.Giuseppe.MyFitApp",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/ic_launcher.png", 
+        "backgroundColor": "#FFFFFF"
+      }
     }
   }
 }
