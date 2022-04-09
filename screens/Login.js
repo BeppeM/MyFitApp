@@ -6,7 +6,7 @@ import * as SecureStore from "expo-secure-store";
 //style
 import { custom } from "../styles.js";
 //firebase authentication
-import { handleLogin, handleReg } from "../firebase.js";
+import { handleLogin, handleReg, signInWithGoogle } from "../firebase.js";
 
 export default function Login({ navigation }) {
   //setEmail from the context because we need it for other screens
@@ -37,32 +37,34 @@ export default function Login({ navigation }) {
           setCredLog({ password: v, email: credLogin.email });
         }}
       />
+
       <View>
         <Text style={custom.text}>{logErr}</Text>
       </View>
+
       <Pressable
         style={{ ...custom.buttonStyle }}
         onPress={() => {
+          console.log("Credenziali: ");
+          console.log(credLogin);
           handleLogin(credLogin.email, credLogin.password)
             .then((userCredential) => {
               // Signed in
               //setting the global email
+              //console.log(userCredential)
               glbEmail.current = credLogin.email;
               //saving credentials locally
               alertSaveCred(credLogin);
               navigation.replace("MyTrainings");
             })
             .catch((error) => {
-              setLogErr(
-                error
-                //"Errore, credenziali errate. Riprova oppure registrati"
-              );
+              setLogErr("Email e/o password sbagliati. Riprovare!");
             });
         }}
       >
         <Text style={{ ...custom.text, alignSelf: "center" }}>Login</Text>
       </Pressable>
-      
+
       <Pressable
         style={{ ...custom.buttonStyle }}
         onPress={() => {
@@ -80,7 +82,7 @@ export default function Login({ navigation }) {
         }}
       >
         <Text style={{ ...custom.text, alignSelf: "center" }}>Registrati</Text>
-      </Pressable>
+      </Pressable>      
     </View>
   );
 }

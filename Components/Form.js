@@ -7,7 +7,10 @@ export default function (props) {
       <TextInput
         style={custom.textInput}
         secureTextEntry={props.desc === "password"}
-        onChangeText={(txt) => props.onNewValue(txt)}
+        onChangeText={(txt) => {
+          props.onNewValue(txt)
+          console.log(txt)
+        }}
       />
     </View>
   );

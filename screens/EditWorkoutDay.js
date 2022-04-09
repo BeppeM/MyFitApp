@@ -4,8 +4,8 @@ import { AddDayWorkout, getExercises } from "../Components/AddDayWorkout";
 import { custom } from "../styles";
 import { writeUserWorkout } from "../firebase";
 export default function EditWorkoutDay({ route, navigation }) {
-  console.log("Bella");
-  console.log(route.params.workoutToEdit);
+  //console.log("Bella");
+  //console.log(route.params.workoutToEdit);
   let [giorno, setGiorno] = useState(
     route.params.id[route.params.id.length - 1]
   );
@@ -27,6 +27,7 @@ export default function EditWorkoutDay({ route, navigation }) {
   );
 }
 
+//Funzione per aggiornare il workout
 const updateDay = async (newDayWork, workout, id, navigation, resetAll) =>{
     let newWorkout= {
         "allenamento": [],
@@ -46,6 +47,7 @@ const updateDay = async (newDayWork, workout, id, navigation, resetAll) =>{
     //scrittura dell'allenamento su firestore
     writeUserWorkout(newWorkout).then((message) => {
         console.log("Salvataggio bitch!");
+        //rileggo workout da firestore
         resetAll();        
         navigation.goBack();
       }).catch((err)=>{

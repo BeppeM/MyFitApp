@@ -10,7 +10,6 @@ import {
   where,
   collection,
   getDocs,
-  addDoc,
   query,
   setDoc,
   doc,
@@ -18,7 +17,6 @@ import {
 } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 //Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCmkzKHx9B9rKqMHyNNh2mTSmUTyQaVYw8",
@@ -32,18 +30,19 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+
 //need for the authentication
 export const auth = getAuth();
 
-//method to handle login
+//method to handle the normal login
 export const handleLogin = (email, password) =>
   signInWithEmailAndPassword(auth, email, password);
 
-//method to handle registration
+//method to handle normal registration
 export const handleReg = (email, password) =>
   createUserWithEmailAndPassword(auth, email, password);
 
-//database
+//firestore database
 export const db = getFirestore();
 
 //ref
