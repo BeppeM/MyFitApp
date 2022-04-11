@@ -42,5 +42,10 @@ There's also a FAB button where user can navigate into AddWorkout screen.
 
 ---
 ## WorkoutDetails:
-WorkoutDetails lets the user to see all the details and also to edit a specific  
-day of the workout if the user wants to.  
+WorkoutDetails lets the user to see all the details and also to edit a specifi  
+day of the workout if the user wants to, by clicking on the Modifica button.
+![WorkoutDetails](./imgReadme/WorkoutDetails.jpg)
+
+
+# Navigation:
+![Navigation](./imgReadme/Navigation.png)
