@@ -3,7 +3,7 @@
 import { View, Text, Pressable } from "react-native";
 import { memo } from "react";
 import { PureCardExercise } from "./CardExercise";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 //into the screen AddWorkout
 function DayCard({ workDay, isEditable, workoutToEdit, navigation, resetAll }) {
   console.log("Entra");

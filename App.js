@@ -8,7 +8,7 @@ import MyTrainings from "./screens/MyTrainings.js";
 import WorkoutDetails from "./screens/WorkoutDetails.js";
 import { createContext } from "react";
 import AddWorkout from "./screens/AddWorkout.js";
-import { custom } from "./styles.js";
+import { custom } from "./styles/styles.js";
 import Loading from "./screens/Loading.js";
 import { LogBox, TouchableOpacity, Text } from "react-native";
 import EditWorkoutDay from "./screens/EditWorkoutDay.js";

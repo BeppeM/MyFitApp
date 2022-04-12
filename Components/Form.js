@@ -1,5 +1,5 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 export default function (props) {
   return (
     <View style={styles.container}>

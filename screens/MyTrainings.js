@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import { appContext } from "../App.js";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 import { PureCardWorkout } from "../Components/Card.js";
 import { FAB } from "react-native-paper";
-import { queryWorkout, readWorkouts } from "../firebase.js";
+import { queryWorkout, readWorkouts } from "../services/firebase.js";
 
 export default function MyTrainings({ navigation }) {
   //Ref from the context

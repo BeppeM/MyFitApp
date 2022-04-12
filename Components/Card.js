@@ -5,8 +5,8 @@ import {
   TouchableOpacity,
   Pressable,
 } from "react-native";
-import { deleteWorkout } from "../firebase.js";
-import { custom } from "../styles.js";
+import { deleteWorkout } from "../services/firebase.js";
+import { custom } from "../styles/styles.js";
 import { useContext } from 'react';
 import { appContext } from "../App.js";
 //Card for showing all user workouts stored on firestore

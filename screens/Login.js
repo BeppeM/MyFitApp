@@ -4,9 +4,9 @@ import { appContext } from "../App.js";
 import { useState, useContext } from "react";
 import * as SecureStore from "expo-secure-store";
 //style
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 //firebase authentication
-import { handleLogin, handleReg, signInWithGoogle } from "../firebase.js";
+import { handleLogin, handleReg, signInWithGoogle } from "../services/firebase.js";
 
 export default function Login({ navigation }) {
   //setEmail from the context because we need it for other screens

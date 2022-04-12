@@ -1,5 +1,5 @@
 import { View, ActivityIndicator, Text } from "react-native";
-import { custom } from "../styles";
+import { custom } from "../styles/styles";
 import * as SecureStore from "expo-secure-store";
 import { useContext, useEffect } from "react";
 import { appContext } from "../App.js";

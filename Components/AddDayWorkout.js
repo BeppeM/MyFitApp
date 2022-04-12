@@ -2,7 +2,7 @@
 //Include il componente Esercizio
 import { useState, useRef } from "react";
 import { Text, View, Pressable } from "react-native";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 import { AddExercise } from "./AddExercise";
 import { PureCardExercise } from "./CardExercise";
 

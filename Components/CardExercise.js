@@ -3,7 +3,7 @@
 
 import { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 function CardExercise({ exercise }) {
   return (
     <View style={custom.cardExercise}>

@@ -6,7 +6,7 @@ import {
   Alert,
   Pressable,
 } from "react-native";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 import Form from "../Components/Form";
 import { useRef, useState, useContext } from "react";
 import { AddDayWorkout, getExercises } from "../Components/AddDayWorkout.js";
@@ -14,7 +14,7 @@ import { PureDayCard } from "../Components/DayCard.js";
 //context to get email from the main screen
 import { appContext } from "../App.js";
 //write on firestore
-import { writeUserWorkout } from "../firebase.js";
+import { writeUserWorkout } from "../services/firebase.js";
 
 //JSON object che contiene tutti gli esercizi dei giorni aggiunti!
 let workoutDays;
@@ -114,7 +114,7 @@ const addWorkout = async (workoutName, navigation, route) => {
 
 //alert appears when click on Aggiungi workout ma il titolo è vuoto
 const alertTitle = () =>
-  Alert.alert("Attenzione!", "Inserisci il titolo dell'allenamento", [
+  Alert.alert("Attenzione!", "Inserisci il workout", [
     {
       text: "Cancel",
       onPress: () => console.log("Cancel Pressed"),

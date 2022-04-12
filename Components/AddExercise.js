@@ -9,7 +9,7 @@ import {
   Alert,
   Pressable,
 } from "react-native";
-import { custom } from "../styles.js";
+import { custom } from "../styles/styles.js";
 import SetRep from "./SetRep";
 
 export function AddExercise({ day, dailyExercises, ...props }) {

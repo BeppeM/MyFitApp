@@ -6,7 +6,7 @@ import {
   View,  
   ScrollView,
 } from "react-native";
-import { custom } from "../styles";
+import { custom } from "../styles/styles";
 import { PureDayCard } from "../Components/DayCard";
 
 export default function WorkoutDetails({ navigation, route }) {
