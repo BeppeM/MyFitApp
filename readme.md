@@ -4,11 +4,10 @@ This is an university project made with React Native and Expo.
 ---
 # How does the app work:
 The idea was to let user who workout, creating, updating, deleting, reading workouts.  
-Essentially the user can do CRUD operations.  
+Essentially the user can do CRUD operations and manage the workouts.
 
 ---
 # App Screens:
----
 ## Loading:
 The Loading screen is used to try to fetch email and password from the local  
 storage. If it fails, then switch to the Login screen.  
@@ -25,7 +24,7 @@ encrypt and securely store key-value pairs locally on the device.
 ![Login](./imgReadme/Login.jpg)
 
 ---
----
+
 ![LoginStore](./imgReadme/LoginStore.jpg)
 
 ---
@@ -42,10 +41,29 @@ There's also a FAB button where user can navigate into AddWorkout screen.
 
 ---
 ## WorkoutDetails:
-WorkoutDetails lets the user to see all the details and also to edit a specifi  
+WorkoutDetails lets the user to see all the details and also to edit a specific   
 day of the workout if the user wants to, by clicking on the Modifica button.
+
 ![WorkoutDetails](./imgReadme/WorkoutDetails.jpg)
 
+----
+## AddWorkout:
+AddWorkout is the sreen where user can add new Workout.  
+The workout is divided in days.  
+Each day can contain more exercises(At least one).  
 
+![AddWorkout](./imgReadme/AddWorkout.jpg)
+
+---
+## EditWorkoutDay:
+The EditWorkoutDay screen lets the user edit the workout day selected.  
+The components of the screen are the same as the AddWorkout.  
+![EditWorkoutDay](./imgReadme/EditWorkoutDay.jpg)
+
+---
 # Navigation:
+
 ![Navigation](./imgReadme/Navigation.png)
+
+# Architecture:
+![Architecture](./imgReadme/MyFitAppArchitecture.png)
