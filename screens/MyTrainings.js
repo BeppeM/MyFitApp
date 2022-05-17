@@ -1,13 +1,8 @@
 /**
  * Screen used to show all the trainings of the user logged in
  */
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-} from "react-native";
-import { useState, useContext, useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView, Animated } from "react-native";
+import { useState, useContext, useEffect, useRef } from "react";
 import { appContext } from "../App.js";
 import { custom } from "../styles/styles.js";
 import { PureCardWorkout } from "../Components/Card.js";
@@ -21,30 +16,46 @@ export default function MyTrainings({ navigation }) {
   const email = glbEmail.current;
   //console.log(email);
   const [workouts, setWorkouts] = useState([]);
+  const translate = useRef(new Animated.Value(-1000)).current;
+
+  const translation = () => {
+    // Will change fadeAnim value to 1 in 5 seconds
+    Animated.timing(translate, {
+      toValue: 0,
+      duration: 500
+    }).start();
+  };
 
   //useEffect performed only on mounts of the component
   //Read all the workouts of the user logged in
   useEffect(async () => {
+    console.log("Mounting MyTrainings...")
     //Getting data from firestore
     console.log("Fetching workouts of: " + email + " from firestore");
     reading(email, setWorkouts);
     console.log(workouts);
+    return () =>{
+      console.log("Unmounting MyTrainings...")
+    }
   }, []);
 
   //MyTraining component
   return (
-    <View style={custom.background}>      
-      <ScrollView style={{marginTop: 10}} keyboardShouldPersistTaps="always">
+    <View style={custom.background}>
+      <ScrollView style={{ marginTop: 10 }} keyboardShouldPersistTaps="always">
         {workouts === [] ? (
           <Text>Loading...</Text>
         ) : (
           //Mostro tutti i workout dell'utente
+          <Animated.View                  
+          >
           <Workouts
             workouts={workouts}
             navigation={navigation}
             //used to read again te workouts from firestore
             resetAll={() => reading(email, setWorkouts)}
           />
+          </Animated.View>
         )}
       </ScrollView>
       <FAB
@@ -96,9 +107,7 @@ const reading = async (email, setWorkouts) =>
           ...workout.data(),
           id: workout.id,
         });
-      });
-      console.log("Finished fetching workouts of: " + email);
-      console.log(tmp);
+      });      
       //Fetch done, i rerender the whole component
       setWorkouts(tmp);
     })
@@ -110,6 +119,6 @@ const styles = StyleSheet.create({
     margin: 16,
     right: 0,
     bottom: 0,
-    backgroundColor: "#5e92f3",
+    backgroundColor: "#EEC139",
   },
 });

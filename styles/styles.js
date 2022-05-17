@@ -18,7 +18,8 @@ export const custom = StyleSheet.create({
   //Background style
   background: {
     flex: 1,
-    backgroundColor: "#1a237e",
+    backgroundColor: "#070709",
+    //backgroundColor: "#1a237e",
     justifyContent: "center",
   },
   //All text must be white
@@ -35,12 +36,14 @@ export const custom = StyleSheet.create({
   //Cards Workout into MyTrainings screen
   cardContainer: {
     flex: 1,
-    backgroundColor: "#1565c0",
+    backgroundColor: "#6289FF",
+    //backgroundColor: "#1565c0",
     padding: 5,
     ...stdStyle.commonStyle,
   },
   buttonStyle: {
-    backgroundColor: "#1565c0",
+    //backgroundColor: "#D5A418",
+    backgroundColor: "#B28C00",
     borderWidth: 1,
     borderColor: "white",
     borderRadius: 30,
@@ -52,7 +55,8 @@ export const custom = StyleSheet.create({
   },
   //style for the card Exercises shown in the screen AddWorkout and also Workout details
   cardExercise: {
-    backgroundColor: "#5e92f3",
+    backgroundColor: "#1D1E2D",
+    //backgroundColor: "#5e92f3",
     ...stdStyle.commonStyle,
   },
   //Style for textInputs
@@ -65,12 +69,15 @@ export const custom = StyleSheet.create({
     borderRadius: 5,
     color: "white",
   },
+  exerciseView:{
+    backgroundColor: '#59A9FF'
+  }
 });
 
 //Button style
 export const buttonStyle = {
   buttonStyle: {
-    backgroundColor: "#5e92f3",
+    backgroundColor: "#D5A419",
     borderWidth: 1,
     borderColor: "white",
     borderRadius: 30,

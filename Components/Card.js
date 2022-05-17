@@ -30,7 +30,7 @@ function Card({ custom, navigation, id, resetAll, ...props }) {
 
 //Two buttons
 //Delete workout
-function HandleWorkout({navigation, id, reset, glbEmail}) {
+function HandleWorkout({ id, reset, glbEmail}) {
   return (
     <>
       <Pressable

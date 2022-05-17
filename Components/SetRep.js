@@ -18,8 +18,8 @@ export default function SetRep({exercise, sr, ...props}){
           <Text style={custom.text}>{props.titolo}:</Text>
           <NumericInput
             textColor= 'white'
-            rightButtonBackgroundColor='#0d47a1'
-            leftButtonBackgroundColor='#0d47a1'
+            rightButtonBackgroundColor='#EEC139'
+            leftButtonBackgroundColor='#EEC139'
             minValue={0}
             containerStyle={styles.numInput}
             rounded

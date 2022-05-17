@@ -44,15 +44,25 @@ export function AddExercise({ day, dailyExercises, ...props }) {
     <View style={styles.exerciseView}>
       <View style={styles.saveButton}>
         <Pressable
-          style={{ ...custom.buttonStyle, width: "25%" }}
+          style={{
+            ...custom.buttonStyle,
+            width: "25%",
+            backgroundColor: "#EEC139",
+          }}
           onPress={() => {
-            checkForm()
-              ? //Gestire questa parte
-                update()
-              : alertExercise();
+            checkForm() ? update() : alertExercise();
           }}
         >
-          <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>Salva</Text>
+          <Text
+            style={{
+              ...custom.text,
+              alignSelf: "center",
+              fontSize: 15,
+              color: "#000000",
+            }}
+          >
+            Salva
+          </Text>
         </Pressable>
       </View>
       <ExcerciseView
@@ -111,6 +121,7 @@ const alertExercise = () =>
 
 const styles = StyleSheet.create({
   exerciseView: {
+    backgroundColor: "#1D1E2D",
     flex: 1,
     borderColor: "white",
     borderWidth: 1,

@@ -17,15 +17,15 @@ export default function WorkoutDetails({ navigation, route }) {
   return (
     <View style={custom.background}>
       <ScrollView keyboardShouldPersistTaps="always">
-        <Text style={{ alignSelf: "center", ...custom.text }}>
+        <Text style={{ alignSelf: "center", ...custom.text, fontSize: 30 }}>
           {workout.title}
-        </Text>
-        <Text style={custom.text}>Creatore: {workout.owner}</Text>
+        </Text>        
         {//mostro gli esercizi raggruppati per giorno          
           workout.allenamento.map((obj, i) => {
           return <PureDayCard style={custom.text} key={i} workDay={obj} isEditable workoutToEdit={workout} navigation={navigation} resetAll={route.params.resetAll}/>;
         })}
       </ScrollView>
+      <Text style={{...custom.text, marginBottom: 15, marginLeft: 10}}>Creatore: {workout.owner}</Text>      
     </View>
   );
 }
