@@ -6,12 +6,11 @@ import { useEffect, useState } from "react";
 import { custom } from "../styles/styles";
 import { PureDayCard } from "../Components/DayCard";
 import { AppLoading } from "expo";
-import { 
+import {
   useFonts,
   Allan_400Regular,
-  Allan_700Bold 
-} from '@expo-google-fonts/allan';
-
+  Allan_700Bold,
+} from "@expo-google-fonts/allan";
 
 export default function WorkoutDetails({ navigation, route }) {
   //Variable for storing the quote fetched from the API https://type.fit/api/quotes
@@ -22,7 +21,8 @@ export default function WorkoutDetails({ navigation, route }) {
   console.log(workout);
 
   useEffect(() => {
-    console.log("Fetching the motivational quote...")
+    console.log("Fetching the motivational quote...");
+    //Fetching motivational quote
     fetch("https://type.fit/api/quotes")
       .then(function (response) {
         return response.json();
@@ -32,19 +32,19 @@ export default function WorkoutDetails({ navigation, route }) {
         //Fetching random quote
         let indx = Math.floor(Math.random() * data.length);
         //Update the quote and rerendering the screen
-        setQuote(data[indx]);        
+        setQuote(data[indx]);
       });
   }, []);
-  
+
   console.log("Quote of the day: ");
-        console.log(quote);  
+  console.log(quote);
   //Fetching the font
   let [fontsLoaded, error] = useFonts({
-    Allan_400Regular
-  })
-  
-  if(!fontsLoaded){
-    return <View></View>
+    Allan_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <View></View>;
   }
 
   return (
@@ -59,7 +59,7 @@ export default function WorkoutDetails({ navigation, route }) {
               ...custom.text,
               fontSize: 20,
               marginLeft: 10,
-              fontFamily: "Allan_400Regular"
+              fontFamily: "Allan_400Regular",
             }}
           >
             "{quote.text}" {"\n"}cit. {quote.author}
@@ -86,7 +86,14 @@ export default function WorkoutDetails({ navigation, route }) {
           })
         }
       </ScrollView>
-      <Text style={{ ...custom.text, marginBottom: 15, marginLeft: 10 }}>
+      <Text
+        style={{
+          ...custom.text,
+          marginBottom: 15,
+          marginLeft: 10,          
+          fontFamily: "Allan_400Regular",
+        }}
+      >
         Creatore: {workout.owner}
       </Text>
     </View>

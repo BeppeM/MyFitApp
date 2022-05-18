@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@eliav2/react-native-collapsible-view": "^1.4.0",
     "@expo-google-fonts/alex-brush": "^0.2.2",
     "@expo-google-fonts/allan": "^0.2.2",
     "@expo-google-fonts/bonbon": "^0.2.2",
@@ -23,12 +24,14 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
+    "react-native-collapsible": "^1.6.0",
     "react-native-dialog": "^9.2.1",
     "react-native-elements": "^3.4.2",
     "react-native-material-menu": "^2.0.0",
     "react-native-numeric-input": "^1.9.1",
     "react-native-paper": "^4.11.2",
     "react-native-popup-menu": "^0.15.12",
+    "react-native-reanimated": "^2.8.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.10.1",
     "react-native-uuid": "^2.0.1",

@@ -1,6 +1,6 @@
 //Form used to insert a new Exercise
 //It is used inside component DayWorkout
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,7 +12,13 @@ import {
 import { custom } from "../styles/styles.js";
 import SetRep from "./SetRep";
 
-export function AddExercise({ day, dailyExercises, ...props }) {
+export function AddExercise({
+  day,
+  dailyExercises,
+  onLayout,
+  expanded,
+  ...props
+}) {
   //state for the excercise form
   const [exercise, setExercise] = useState({
     title: "",
@@ -39,9 +45,10 @@ export function AddExercise({ day, dailyExercises, ...props }) {
     //updating exercises number
     props.updateNumExercises(props.idx);
   };
+
   //returning component
   return (
-    <View style={styles.exerciseView}>
+    <View style={styles.exerciseView} onLayout={onLayout}>
       <View style={styles.saveButton}>
         <Pressable
           style={{

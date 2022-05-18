@@ -1,11 +1,5 @@
 //Screen used to add a new Workout of the user
-import {
-  Text,
-  View,
-  ScrollView,
-  Alert,
-  Pressable,
-} from "react-native";
+import { Text, View, ScrollView, Alert, Pressable } from "react-native";
 import { custom } from "../styles/styles.js";
 import Form from "../Components/Form";
 import { useRef, useState, useContext } from "react";
@@ -33,49 +27,53 @@ export default function AddWorkout({ navigation, route }) {
 
   return (
     <View style={custom.background}>
-      {console.log(glbEmail.current)}
+      {/* {console.log(glbEmail.current)}
       {console.log("Giorno dei workout: ")}
-      {console.log(workoutDays.current)}
+      {console.log(workoutDays.current)} */}
       <ScrollView keyboardShouldPersistTaps="always">
         <View style={custom.background}>
           <Form desc="titolo workout" onNewValue={setWorkoutName} />
-          {          
-            workoutDays.current.map((work, i) => {
-              return <PureDayCard key={i} workDay={work} />;
-            })
-          }
+          {workoutDays.current.map((work, i) => {
+            return <PureDayCard key={i} workDay={work} />;
+          })}
           <AddDayWorkout day={numDays + 1} />
-          <Pressable
-            style={custom.buttonStyle}
-            onPress={() => {
-              //Retrieve exercises of the Day just added
-              let data = getExercises(numDays + 1);              
-              data !== null && data !== undefined
-                ? //Pushing data
-                  (workoutDays.current.push(data),
-                  //Update days
-                  setNumDays(numDays + 1))
-                : //Error alert
-                  alertDay();
-            }}
-          >
-            <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
-              Aggiungi giorno
-            </Text>
-          </Pressable>
+          <View style={{ marginTop: 20 }}>
+            <Pressable
+              style={custom.buttonStyle}
+              onPress={() => {
+                //Retrieve exercises of the Day just added
+                let data = getExercises(numDays + 1);
+                data !== null && data !== undefined
+                  ? //Pushing data
+                    (workoutDays.current.push(data),
+                    //Update days
+                    setNumDays(numDays + 1))
+                  : //Error alert
+                    alertDay();
+              }}
+            >
+              <Text
+                style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}
+              >
+                Aggiungi giorno
+              </Text>
+            </Pressable>
+            <Pressable
+              style={custom.buttonStyle}
+              onPress={
+                workoutName !== "" && workoutDays.current[0] !== undefined
+                  ? () => addWorkout(workoutName, navigation, route)
+                  : alertTitle
+              }
+            >
+              <Text
+                style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}
+              >
+                Aggiungi workout
+              </Text>
+            </Pressable>
+          </View>
         </View>
-        <Pressable
-          style={custom.buttonStyle}
-          onPress={
-            workoutName !== "" && workoutDays.current[0] !== undefined
-              ? () => addWorkout(workoutName, navigation, route)
-              : alertTitle
-          }
-        >
-          <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>
-            Aggiungi workout
-          </Text>
-        </Pressable>
       </ScrollView>
     </View>
   );
@@ -104,11 +102,14 @@ const addWorkout = async (workoutName, navigation, route) => {
   console.log(JSON.parse(s));
   writeUserWorkout(JSON.parse(s)).then((message) => {
     console.log("Fatto bitch!");
-    route.params.reading().then(() =>{
-      navigation.goBack();
-    }).catch((err) =>{
-      console.log(err)
-    })
+    route.params
+      .reading()
+      .then(() => {
+        navigation.goBack();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   });
 };
 

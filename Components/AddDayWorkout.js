@@ -1,10 +1,11 @@
 //Componente per poter aggiungere un giorno al workout all'allenamento
 //Include il componente Esercizio
-import { useState, useRef } from "react";
-import { Text, View, Pressable } from "react-native";
+import { useState, useRef, useEffect } from "react";
+import { Text, View, Pressable, Animated, Easing } from "react-native";
 import { custom } from "../styles/styles.js";
 import { AddExercise } from "./AddExercise";
 import { PureCardExercise } from "./CardExercise";
+import Collapsible from "react-native-collapsible";
 
 //creating context to use into Esercizio.js
 //export const dailyExercisesContext = createContext();
@@ -12,6 +13,7 @@ import { PureCardExercise } from "./CardExercise";
 //JSON object to memorize all the exercises of the current day
 export let dailyExercises;
 
+//Variable to reset the number of exercises added
 let resetNumExercisesDone;
 
 export function AddDayWorkout(props) {
@@ -21,14 +23,16 @@ export function AddDayWorkout(props) {
   resetNumExercisesDone = setNumExercisesDone;
   //Initialization with useRef hook
   dailyExercises = useRef([]);
-
-  //esVisibility used to hide and show exercise form
-  const [esVisibility, setEsVisibility] = useState(false);
-
+  //esVisibility used to hide and show exercise form    
+  const [isVisible, setIsVisible] = useState(false);
   return (
     <View style={custom.cardContainer}>
       <View
-        style={{ borderBottomColor: "white", borderBottomWidth: 1, margin: 4 }}
+        style={{
+          borderBottomColor: "white",
+          borderBottomWidth: 1,
+          margin: 4,
+        }}
       >
         <Text style={custom.text}>Giorno {props.day}:</Text>
       </View>
@@ -40,7 +44,7 @@ export function AddDayWorkout(props) {
             exercise={exercise}
             isEditable={false}
             workoutToEdit={{}}
-            navigation={{}}        
+            navigation={{}}
           />
         ))
       ) : (
@@ -49,22 +53,21 @@ export function AddDayWorkout(props) {
       {
         //Exercise form hide/show
         //Passing the main JSON obj to store data
-        esVisibility && (
+        isVisible && (        
           <AddExercise
-            setEsVisibility={setEsVisibility}
             idx={numExercisesDone + 1}
             updateNumExercises={setNumExercisesDone}
             dailyExercises={dailyExercises}
           />
+        
         )
       }
-
       <Pressable
         style={{ ...custom.buttonStyle, width: "75%" }}
         title="Aggiungi nuovo esercizio"
         onPress={() => {
           //hiding or showing exercise form
-          setEsVisibility(!esVisibility);
+          setIsVisible(!isVisible)
         }}
       >
         <Text style={{ ...custom.text, alignSelf: "center", fontSize: 15 }}>

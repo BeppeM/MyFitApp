@@ -46,16 +46,13 @@ export default function MyTrainings({ navigation }) {
         {workouts === [] ? (
           <Text>Loading...</Text>
         ) : (
-          //Mostro tutti i workout dell'utente
-          <Animated.View                  
-          >
-          <Workouts
+          //Mostro tutti i workout dell'utente          
+          <Workouts          
             workouts={workouts}
             navigation={navigation}
             //used to read again te workouts from firestore
             resetAll={() => reading(email, setWorkouts)}
-          />
-          </Animated.View>
+          />          
         )}
       </ScrollView>
       <FAB
