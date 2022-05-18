@@ -5,29 +5,48 @@ import { Text, View, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { custom } from "../styles/styles";
 import { PureDayCard } from "../Components/DayCard";
+import { AppLoading } from "expo";
+import { 
+  useFonts,
+  Allan_400Regular,
+  Allan_700Bold 
+} from '@expo-google-fonts/allan';
+
+
 export default function WorkoutDetails({ navigation, route }) {
+  //Variable for storing the quote fetched from the API https://type.fit/api/quotes
+  let [quote, setQuote] = useState("");
+  //Workout details
+  const workout = route.params.workout;
+  console.log("Workout details: ");
+  console.log(workout);
+
   useEffect(() => {
-    console.log("Pippo!!");
+    console.log("Fetching the motivational quote...")
     fetch("https://type.fit/api/quotes")
       .then(function (response) {
         return response.json();
       })
       //It's returned an array of quotes
       .then(function (data) {
+        //Fetching random quote
         let indx = Math.floor(Math.random() * data.length);
         //Update the quote and rerendering the screen
-        setQuote(data[indx]);
-        console.log("Quote of the day: ");
-        console.log(quote);
+        setQuote(data[indx]);        
       });
   }, []);
+  
+  console.log("Quote of the day: ");
+        console.log(quote);  
+  //Fetching the font
+  let [fontsLoaded, error] = useFonts({
+    Allan_400Regular
+  })
+  
+  if(!fontsLoaded){
+    return <View></View>
+  }
 
-  //Variable for storing the quote fetched from the API https://type.fit/api/quotes
-  let [quote, setQuote] = useState("");
-  const workout = route.params.workout;
-  //workout details passed
-  console.log("Workout details: ");
-  console.log(workout);
   return (
     <View style={custom.background}>
       {quote !== "" ? (
@@ -40,6 +59,7 @@ export default function WorkoutDetails({ navigation, route }) {
               ...custom.text,
               fontSize: 20,
               marginLeft: 10,
+              fontFamily: "Allan_400Regular"
             }}
           >
             "{quote.text}" {"\n"}cit. {quote.author}
