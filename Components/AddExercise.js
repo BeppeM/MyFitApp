@@ -39,9 +39,7 @@ export function AddExercise({
     //updating exercises of the day
     dailyExercises.current.push(exercise);
     console.log("Exercise added: ");
-    console.log(dailyExercises);
-    //Closing Esercizio component
-    props.setEsVisibility();
+    console.log(dailyExercises);    
     //updating exercises number
     props.updateNumExercises(props.idx);
   };
@@ -58,6 +56,7 @@ export function AddExercise({
           }}
           onPress={() => {
             checkForm() ? update() : alertExercise();
+            props.setVisibility()
           }}
         >
           <Text

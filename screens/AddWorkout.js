@@ -100,6 +100,7 @@ const addWorkout = async (workoutName, navigation, route) => {
   console.log("Workout aggiunto con successo");
   console.log(workoutName);
   console.log(JSON.parse(s));
+  //Salvo su firestore
   writeUserWorkout(JSON.parse(s)).then((message) => {
     console.log("Fatto bitch!");
     route.params

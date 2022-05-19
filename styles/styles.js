@@ -4,7 +4,7 @@
 import { StyleSheet } from "react-native";
 
 //My common style
-const stdStyle = StyleSheet.create({
+export const stdStyle = StyleSheet.create({
   commonStyle: {
     borderColor: "white",
     borderRadius: 5,

@@ -55,6 +55,7 @@ export function AddDayWorkout(props) {
         //Passing the main JSON obj to store data
         isVisible && (        
           <AddExercise
+            setVisibility={() => {setIsVisible(!isVisible)}}
             idx={numExercisesDone + 1}
             updateNumExercises={setNumExercisesDone}
             dailyExercises={dailyExercises}

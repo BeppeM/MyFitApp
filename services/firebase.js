@@ -35,8 +35,10 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 
 //method to handle the normal login
-export const handleLogin = (email, password) =>
+export const handleLogin = (email, password) => 
   signInWithEmailAndPassword(auth, email, password);
+
+export const user = auth.currentUser;    
 
 //method to handle normal registration
 export const handleReg = (email, password) =>

@@ -5,7 +5,6 @@ import { Text, View, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { custom } from "../styles/styles";
 import { PureDayCard } from "../Components/DayCard";
-import { AppLoading } from "expo";
 import {
   useFonts,
   Allan_400Regular,
@@ -18,8 +17,7 @@ export default function WorkoutDetails({ navigation, route }) {
   //Workout details
   const workout = route.params.workout;
   console.log("Workout details: ");
-  console.log(workout);
-
+  console.log(workout);  
   useEffect(() => {
     console.log("Fetching the motivational quote...");
     //Fetching motivational quote
@@ -47,7 +45,7 @@ export default function WorkoutDetails({ navigation, route }) {
     return <View></View>;
   }
 
-  return (
+  return (    
     <View style={custom.background}>
       {quote !== "" ? (
         <View>
@@ -94,7 +92,9 @@ export default function WorkoutDetails({ navigation, route }) {
           fontFamily: "Allan_400Regular",
         }}
       >
-        Creatore: {workout.owner}
+        Creatore: {
+          workout.owner.split("@")[0]
+          }
       </Text>
     </View>
   );

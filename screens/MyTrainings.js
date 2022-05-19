@@ -7,7 +7,7 @@ import { appContext } from "../App.js";
 import { custom } from "../styles/styles.js";
 import { PureCardWorkout } from "../Components/Card.js";
 import { FAB } from "react-native-paper";
-import { queryWorkout, readWorkouts } from "../services/firebase.js";
+import { queryWorkout, readWorkouts, user } from "../services/firebase.js";
 
 export default function MyTrainings({ navigation }) {
   //Ref from the context
@@ -16,43 +16,46 @@ export default function MyTrainings({ navigation }) {
   const email = glbEmail.current;
   //console.log(email);
   const [workouts, setWorkouts] = useState([]);
-  const translate = useRef(new Animated.Value(-1000)).current;
-
-  const translation = () => {
-    // Will change fadeAnim value to 1 in 5 seconds
-    Animated.timing(translate, {
-      toValue: 0,
-      duration: 500
-    }).start();
-  };
 
   //useEffect performed only on mounts of the component
   //Read all the workouts of the user logged in
   useEffect(async () => {
-    console.log("Mounting MyTrainings...")
+    console.log("Mounting MyTrainings...");
     //Getting data from firestore
     console.log("Fetching workouts of: " + email + " from firestore");
     reading(email, setWorkouts);
     console.log(workouts);
-    return () =>{
-      console.log("Unmounting MyTrainings...")
-    }
+    console.log("user logged: ")
+    console.log(user)
+    return () => {
+      console.log("Unmounting MyTrainings...");
+    };    
   }, []);
 
   //MyTraining component
   return (
     <View style={custom.background}>
       <ScrollView style={{ marginTop: 10 }} keyboardShouldPersistTaps="always">
-        {workouts === [] ? (
-          <Text>Loading...</Text>
+        {workouts.length === 0 ? (
+          <View
+            style={{
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ color: "white", fontSize: 20, marginTop: 10 }}>
+              Aggiungi un nuovo workout!!
+            </Text>
+          </View>
         ) : (
-          //Mostro tutti i workout dell'utente          
-          <Workouts          
+          //Mostro tutti i workout dell'utente
+          <Workouts
             workouts={workouts}
             navigation={navigation}
             //used to read again te workouts from firestore
             resetAll={() => reading(email, setWorkouts)}
-          />          
+          />
         )}
       </ScrollView>
       <FAB
@@ -104,7 +107,7 @@ const reading = async (email, setWorkouts) =>
           ...workout.data(),
           id: workout.id,
         });
-      });      
+      });
       //Fetch done, i rerender the whole component
       setWorkouts(tmp);
     })

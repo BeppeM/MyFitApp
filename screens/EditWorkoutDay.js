@@ -10,7 +10,7 @@ export default function EditWorkoutDay({ route, navigation }) {
     route.params.id[route.params.id.length - 1]
   );
   return (
-    <View style={custom.background}>
+    <View style={{...custom.background, padding: 8}}>
       <ScrollView keyboardShouldPersistTaps="always">
         <AddDayWorkout day={giorno} />
         <Pressable
@@ -26,7 +26,7 @@ export default function EditWorkoutDay({ route, navigation }) {
             );
           }}
         >
-          <Text style={custom.text}>Modifica Giorno {giorno}</Text>
+          <Text style={{...custom.text, alignSelf: "center", fontSize: 15}}>Modifica Giorno {giorno}</Text>
         </Pressable>
       </ScrollView>
     </View>

@@ -33,8 +33,14 @@ function Initialize() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Loading" component={Loading} />
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+          name="Loading"
+          component={Loading}          
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}          
+        />
         <Stack.Screen
           name="MyTrainings"
           component={MyTrainings}
@@ -45,7 +51,7 @@ function Initialize() {
                   Logout
                 </Text>
               </TouchableOpacity>
-            ),
+            )            
           })}
         />
         <Stack.Screen name="WorkoutDetails" component={WorkoutDetails} />
