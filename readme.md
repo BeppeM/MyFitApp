@@ -7,7 +7,7 @@ This is an university project made with React Native and Expo.
 ---
 ## How does the app work:
 The idea was to let user who workout, creating, updating, deleting, reading workouts.  
-Essentially the user can do CRUD operations and manage the workouts.
+Essentially the user can do CRUD operations and manage his own workouts.
 
 ---
 ## App Screens:
@@ -42,6 +42,7 @@ There's also a FAB button where user can navigate into AddWorkout screen.
 #### WorkoutDetails:
 WorkoutDetails lets the user to see all the details and also to edit a specific   
 day of the workout if the user wants to, by clicking on the Modifica button.
+Above the workout, there is a **motivational quote** which is fetched from an external API.
 
 ![WorkoutDetails](./screenshots/WorkoutDetails.jpg)
 
